@@ -111,6 +111,7 @@ int stats_bus_publish(wifi_ctrl_t *ctrl, void *stats_data)
 {
     webconfig_subdoc_data_t *data;
     int rc;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     bus_error_t status;
     char eventName[MAX_EVENT_NAME_SIZE] = { 0 };
     webconfig_subdoc_type_t subdoc_type;
@@ -548,6 +549,7 @@ int set_managed_guest_interfaces(char *interface_name)
 bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data, bus_user_data_t *user_data)
 {
     (void)user_data;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     webconfig_subdoc_data_t data;
     wifi_mgr_t *mgr = (wifi_mgr_t *)get_wifimgr_obj();
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
@@ -590,6 +592,8 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
         data.u.decoded.num_radios = num_of_radios;
         // tell webconfig to encode
         webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
+	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash]After webconfig_encode, data.u.encoded.raw=%p\n",
+    __FUNCTION__, __LINE__, data.u.encoded.raw);
 
         uint32_t str_size = (strlen(data.u.encoded.raw) + 1);
         p_data->data_type = bus_data_type_string;
@@ -925,6 +929,7 @@ bus_error_t get_assoc_clients_data(char *event_name, raw_data_t *p_data, bus_use
 bus_error_t get_null_subdoc_data(char *name, raw_data_t *p_data, bus_user_data_t *user_data)
 {
     (void)user_data;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     webconfig_subdoc_data_t data;
     wifi_mgr_t *mgr = (wifi_mgr_t *)get_wifimgr_obj();
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
@@ -3083,6 +3088,7 @@ bus_error_t set_force_vap_apply(char *name, raw_data_t *p_data, bus_user_data_t 
 void bus_register_handlers(wifi_ctrl_t *ctrl)
 {
     int rc = bus_error_success;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     char *component_name = "WifiCtrl";
     int num_of_radio = getNumberRadios();
     int num_of_vaps = getTotalNumberVAPs(NULL);

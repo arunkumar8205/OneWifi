@@ -148,6 +148,7 @@ webconfig_error_t encode_beacon_report_subdoc(webconfig_t *config, webconfig_sub
 webconfig_error_t decode_beacon_report_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
 
     webconfig_subdoc_decoded_data_t *params;
     wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d\n", __func__, __LINE__);

@@ -43,6 +43,7 @@ webconfig_error_t init_mac_filter_subdoc(webconfig_subdoc_t *doc)
 
 webconfig_error_t access_check_mac_filter_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     return webconfig_error_none;
 }
 

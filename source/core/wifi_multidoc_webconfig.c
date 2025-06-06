@@ -585,6 +585,7 @@ static int update_vap_info_with_blob_info(void *blob, webconfig_subdoc_data_t *d
 {
     int status = RETURN_OK;
     int num_vaps = 0;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int vap_index;
     int radio_index = 0, rc = -1;
     int vap_array_index = 0;

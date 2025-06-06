@@ -253,6 +253,7 @@ webconfig_error_t   translate_device_object_to_easymesh_for_dml(webconfig_subdoc
 webconfig_error_t translate_radio_object_to_easymesh_for_radio(webconfig_subdoc_data_t *data)
 {
     em_radio_info_t *em_radio_info;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     em_op_class_info_t *em_op_class_info;
     unsigned int radio_index = 0, bss_count = 0, per_radio_subdoc = 0, freq_band = 0, radio_count = 0;
     rdk_wifi_radio_t *radio;
@@ -2563,7 +2564,8 @@ webconfig_error_t  translate_to_easymesh_tables(webconfig_subdoc_type_t type, we
 // translate_from_easymesh_tables() is translations of Easymesh structures to Onewifi structures based on type
 webconfig_error_t   translate_from_easymesh_tables(webconfig_subdoc_type_t type, webconfig_subdoc_data_t *data)
 {
-    if (data == NULL) {
+  wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+     	if (data == NULL) {
         wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Input data is NULL\n", __func__, __LINE__);
         return webconfig_error_invalid_subdoc;
     }

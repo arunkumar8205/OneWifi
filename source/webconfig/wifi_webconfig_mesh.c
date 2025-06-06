@@ -45,11 +45,14 @@ webconfig_error_t init_mesh_subdoc(webconfig_subdoc_t *doc)
 
 webconfig_error_t access_check_mesh_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     return webconfig_error_none;
 }
 
 webconfig_error_t translate_from_mesh_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
+
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if ((data->descriptor & webconfig_data_descriptor_translate_to_ovsdb) == webconfig_data_descriptor_translate_to_ovsdb) {
         if (config->proto_desc.translate_to(webconfig_subdoc_type_mesh, data) != webconfig_error_none) {
             return webconfig_error_translate_to_ovsdb;
@@ -64,6 +67,7 @@ webconfig_error_t translate_from_mesh_subdoc(webconfig_t *config, webconfig_subd
 
 webconfig_error_t translate_to_mesh_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if ((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) {
         if (config->proto_desc.translate_from(webconfig_subdoc_type_mesh, data) != webconfig_error_none) {
             return webconfig_error_translate_from_ovsdb;

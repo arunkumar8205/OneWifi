@@ -69,6 +69,7 @@ webconfig_error_t translate_from_em_channel_stats_subdoc(webconfig_t *config, we
 
 webconfig_error_t translate_to_em_channel_stats_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) || ((data->descriptor & webconfig_data_descriptor_translate_from_easymesh) == webconfig_data_descriptor_translate_from_easymesh)) {
         if (config->proto_desc.translate_from(webconfig_subdoc_type_em_channel_stats, data) != webconfig_error_none) {
             if ((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) {

@@ -60,6 +60,7 @@ webconfig_error_t translate_to_harvester_subdoc(webconfig_t *config, webconfig_s
 
 webconfig_error_t encode_harvester_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *json;
     cJSON *obj;
     instant_measurement_config_t *harvester;

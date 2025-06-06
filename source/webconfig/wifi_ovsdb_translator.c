@@ -472,6 +472,7 @@ void vif_state_ovs_schema_dump(const struct schema_Wifi_VIF_State *vif)
 void debug_external_protos(const webconfig_subdoc_data_t *data, const char *func, int line)
 {
     webconfig_external_ovsdb_t *proto;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     const struct schema_Wifi_Radio_Config *radio_config_row;
     const struct schema_Wifi_Radio_State *radio_state_row;
     const struct schema_Wifi_Blaster_Config *blaster_config_row;
@@ -7067,6 +7068,7 @@ webconfig_error_t   translate_vap_object_from_ovsdb_vif_config_for_mesh(webconfi
 webconfig_error_t   translate_vap_object_from_ovsdb_vif_config_for_home(webconfig_subdoc_data_t *data)
 {
     const struct schema_Wifi_VIF_Config **table;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     unsigned int i = 0;
     webconfig_subdoc_decoded_data_t *decoded_params;
     wifi_vap_info_t *vap;
@@ -7431,6 +7433,7 @@ webconfig_error_t  translate_vap_object_from_ovsdb_config_for_null(webconfig_sub
 
 webconfig_error_t   translate_vap_object_to_ovsdb_vif_config_for_null(webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     const struct schema_Wifi_VIF_Config **vif_config_table;
     const struct schema_Wifi_VIF_State  **vif_state_table;
     const struct schema_Wifi_Associated_Clients **assoc_clients_table;

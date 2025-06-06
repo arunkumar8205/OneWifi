@@ -2648,6 +2648,7 @@ webconfig_error_t decode_bandwidth_from_json(cJSON *radioParams, wifi_freq_bands
 void decode_acs_keep_out_json(const char *json_string, unsigned int num_of_radios, webconfig_subdoc_data_t *data)
 {
     cJSON *json = cJSON_Parse(json_string);
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (json == NULL) {
         const char *error_ptr = cJSON_GetErrorPtr();
         if (error_ptr != NULL) {
@@ -3224,6 +3225,7 @@ webconfig_error_t decode_associated_clients_object(webconfig_subdoc_data_t *data
 
     mac_address_t mac;
     cJSON *obj_vap;
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj_array, *assoc_client, *value_object;
     char *tmp_string;
     mac_addr_str_t tmp_mac_key;

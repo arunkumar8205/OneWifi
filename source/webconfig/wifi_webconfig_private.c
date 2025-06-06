@@ -49,6 +49,7 @@ webconfig_error_t access_check_private_subdoc(webconfig_t *config, webconfig_sub
 
 webconfig_error_t translate_from_private_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	 wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (((data->descriptor & webconfig_data_descriptor_translate_to_ovsdb) == webconfig_data_descriptor_translate_to_ovsdb) 
         ||  ((data->descriptor & webconfig_data_descriptor_translate_to_easymesh) == webconfig_data_descriptor_translate_to_easymesh)) {
         if (config->proto_desc.translate_to(webconfig_subdoc_type_private, data) != webconfig_error_none) {

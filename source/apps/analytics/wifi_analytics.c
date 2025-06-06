@@ -179,7 +179,7 @@ int analytics_event_exec_timeout(wifi_app_t *apps, void *arg)
 int analytics_event_webconfig_get_data_for_dmlthread(wifi_app_t *apps, void *arg, wifi_event_subtype_t sub_type)
 {
     webconfig_subdoc_data_t *doc = (webconfig_subdoc_data_t *)arg;
-
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (doc == NULL) {
        /*Note : This is not error case, but this check is used to denote webconfig_set_data event
         * is received by the handle_webconfig_event() function and decode is not happened yet
@@ -196,6 +196,7 @@ int analytics_event_webconfig_get_data_for_dmlthread(wifi_app_t *apps, void *arg
 int analytics_event_webconfig_set_data(wifi_app_t *apps, void *arg, wifi_event_subtype_t sub_type)
 {
     webconfig_subdoc_data_t *doc = (webconfig_subdoc_data_t *)arg;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     char temp_str[512];
     webconfig_subdoc_decoded_data_t *decoded_params = NULL;
     rdk_wifi_radio_t *radio;
