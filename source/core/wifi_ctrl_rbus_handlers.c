@@ -112,7 +112,6 @@ int stats_bus_publish(wifi_ctrl_t *ctrl, void *stats_data)
     webconfig_subdoc_data_t *data;
     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int rc;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     bus_error_t status;
     char eventName[MAX_EVENT_NAME_SIZE] = { 0 };
     webconfig_subdoc_type_t subdoc_type;
