@@ -1284,6 +1284,7 @@ void channel_change_callback(wifi_channel_change_event_t radio_channel_param)
 int init_wifi_ctrl(wifi_ctrl_t *ctrl)
 {
     unsigned int i;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     pthread_condattr_t cond_attr;
 
     ctrl->db_consolidated = (0 == access("/tmp/db_consolidated", F_OK));
@@ -1346,6 +1347,7 @@ int init_wifi_ctrl(wifi_ctrl_t *ctrl)
     }
 
     //Register to BUS for webconfig interactions
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls bus_register_handlers\n",__FUNCTION__, __LINE__);
     bus_register_handlers(ctrl);
 
     // subscribe for BUS events

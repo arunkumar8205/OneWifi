@@ -3090,7 +3090,7 @@ bus_error_t set_force_vap_apply(char *name, raw_data_t *p_data, bus_user_data_t 
 void bus_register_handlers(wifi_ctrl_t *ctrl)
 {
     int rc = bus_error_success;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls webconfig_init_data_get_subdoc\n",__FUNCTION__, __LINE__);
     char *component_name = "WifiCtrl";
     int num_of_radio = getNumberRadios();
     int num_of_vaps = getTotalNumberVAPs(NULL);
