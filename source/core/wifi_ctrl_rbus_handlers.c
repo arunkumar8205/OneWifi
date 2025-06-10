@@ -600,7 +600,11 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
         // tell webconfig to encode
         webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
 	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash]After webconfig_encode, data.u.encoded.raw=%p\n",__FUNCTION__, __LINE__, data.u.encoded.raw);
-        uint32_t str_size = (strlen(data.u.encoded.raw) + 1);
+        if (data.u.encoded.raw == NULL) {
+	    	wifi_util_error_print(WIFI_CTRL, "%s:%d: encoded.raw is NULL\n", __func__, __LINE__);
+    	}
+	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: First few bytes: %.10s\n", __func__, __LINE__, data.u.encoded.raw);
+	uint32_t str_size = (strlen(data.u.encoded.raw) + 1);
         p_data->data_type = bus_data_type_string;
         p_data->raw_data.bytes = malloc(str_size);
         if (p_data->raw_data.bytes == NULL) {
