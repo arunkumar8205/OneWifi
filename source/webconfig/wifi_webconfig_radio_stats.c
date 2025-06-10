@@ -54,6 +54,7 @@ webconfig_error_t translate_from_radio_channel_stats_subdoc(webconfig_t *config,
 
 webconfig_error_t translate_to_radio_channel_stats_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     return webconfig_error_none;
 }
 

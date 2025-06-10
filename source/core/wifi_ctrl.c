@@ -337,6 +337,7 @@ void ctrl_queue_loop(wifi_ctrl_t *ctrl)
                         break;
 
                     case wifi_event_type_monitor:
+			wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls handle_monitor_event\n",__FUNCTION__, __LINE__);
                         handle_monitor_event(ctrl, event->u.core_data.msg, event->u.core_data.len, event->sub_type);
                         // TODO: event 4 flood
                         // wifi_util_dbg_print(WIFI_CTRL,"[%s]: Received monitor Event %d\r\n",__FUNCTION__, event->event_type);
@@ -1742,6 +1743,7 @@ int start_wifi_ctrl(wifi_ctrl_t *ctrl)
     webconfig_send_full_associate_status(ctrl);
     ctrl->exit_ctrl = false;
     ctrl->ctrl_initialized = true;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls ctrl_queu_loop\n",__FUNCTION__, __LINE__);
     ctrl_queue_loop(ctrl);
 
 #ifdef ONEWIFI_ANALYTICS_APP_SUPPORT

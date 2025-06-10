@@ -2662,6 +2662,7 @@ webconfig_error_t decode_bandwidth_from_json(cJSON *radioParams, wifi_freq_bands
         "8080", "320"
 #endif
     };
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     const int arr_size = sizeof(bandwidths) / sizeof(bandwidths[0]);
     for (int i = 0; i < arr_size; i++) {
         wifi_channelBandwidth_t bw_type = string_to_channel_width_convert(bandwidths[i]);
@@ -3253,6 +3254,7 @@ webconfig_error_t decode_associated_clients_object(webconfig_subdoc_data_t *data
 {
 
     mac_address_t mac;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj_vap;
     cJSON *obj_array, *assoc_client, *value_object;
     char *tmp_string;

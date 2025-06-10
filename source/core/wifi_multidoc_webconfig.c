@@ -625,6 +625,7 @@ static int update_vap_info_managed_xfinity(void *data, wifi_vap_info_t *vap_info
 static int update_vap_info_with_blob_info(void *blob, void *amenities_blob, webconfig_subdoc_data_t *data, const char *vap_prefix, bool managed_wifi_enabled,pErr execRetVal)
 {
     int status = RETURN_OK;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int num_vaps = 0;
     int vap_index;
     int radio_index = 0;

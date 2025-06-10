@@ -110,6 +110,7 @@ static int get_subdoc_type(wifi_provider_response_t *response, webconfig_subdoc_
 int stats_bus_publish(wifi_ctrl_t *ctrl, void *stats_data)
 {
     webconfig_subdoc_data_t *data;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int rc;
     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     bus_error_t status;
@@ -564,6 +565,7 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
     if (!ctrl->ctrl_initialized) {
         wifi_util_dbg_print(WIFI_CTRL, "%s:%d: Ctrl not initialized skip request.\n", __FUNCTION__,
             __LINE__);
+	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] returned bus_error_invalid_operation Ctrl not initialized skip request \n",__FUNCTION__, __LINE__);
         return bus_error_invalid_operation;
     }
     if (ctrl->network_mode == rdk_dev_mode_type_gw) {
@@ -574,6 +576,7 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
                 wifi_util_info_print(WIFI_CTRL,
                     "%s:%d: sync_retries=%d wifidb and global radio config not updated\n",
                     __FUNCTION__, __LINE__, sync_retries);
+		wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] returned bus_error_invalid_operation wifidb and global radio config not updated \n",__FUNCTION__, __LINE__);
                 return bus_error_invalid_operation;
             }
         }
@@ -603,6 +606,7 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
         if (p_data->raw_data.bytes == NULL) {
             wifi_util_error_print(WIFI_CTRL,"%s:%d memory allocation is failed:%d\r\n",__func__,
                 __LINE__, str_size);
+	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] memory allocation is failed\n",__FUNCTION__, __LINE__);
             return bus_error_out_of_resources;
         }
         strncpy((char *)p_data->raw_data.bytes, data.u.encoded.raw, str_size);
@@ -612,6 +616,7 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
     } else if (ctrl->network_mode == rdk_dev_mode_type_ext) {
         if (check_wifi_radio_sched_timeout_active_status(ctrl) == true) {
             wifi_util_dbg_print(WIFI_CTRL, "%s wifidb and cache are not synced!\n", __FUNCTION__);
+	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] memory wifidb and cache are not synced!\n",__FUNCTION__, __LINE__);
             return bus_error_invalid_operation;
         }
         memset(&data, 0, sizeof(webconfig_subdoc_data_t));
@@ -629,6 +634,7 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
         p_data->data_type = bus_data_type_string;
         p_data->raw_data.bytes = malloc(str_size);
         if (p_data->raw_data.bytes == NULL) {
+		wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] memory allocation is failed\n",__FUNCTION__, __LINE__);
             wifi_util_error_print(WIFI_CTRL,"%s:%d memory allocation is failed:%d\r\n",__func__,
                 __LINE__, str_size);
             return bus_error_out_of_resources;

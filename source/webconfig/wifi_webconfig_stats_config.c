@@ -78,6 +78,7 @@ webconfig_error_t translate_to_stats_config_subdoc(webconfig_t *config, webconfi
 webconfig_error_t free_stats_config_entries(webconfig_subdoc_data_t *data)
 {
     webconfig_subdoc_decoded_data_t *decoded_params;
+         wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     stats_config_t *stats_config, *temp_stats_config;
     char key[64] = {0};
 
@@ -108,6 +109,7 @@ webconfig_error_t free_stats_config_entries(webconfig_subdoc_data_t *data)
 webconfig_error_t encode_stats_config_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json, *st_obj_arr;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     webconfig_subdoc_decoded_data_t *params;
     char *str;
     wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d\n", __func__, __LINE__);

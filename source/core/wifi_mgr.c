@@ -336,7 +336,7 @@ int start_wifimgr()
     } else {
         wifi_util_error_print(WIFI_MGR,"%s:%d NULL Ctrl Pointer Unable to init app\n", __func__, __LINE__);
     }
-
+     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls \n",__FUNCTION__, __LINE__);
     if (start_wifi_ctrl(&g_wifi_mgr.ctrl) != 0) {
         wifi_util_error_print(WIFI_MGR,"%s: wifi ctrl start failed\n", __func__);
         return -1;
@@ -368,6 +368,7 @@ int main(int argc, char *argv[])
     }
 
     bus_get_vap_init_parameter(WIFI_DEVICE_MODE, &g_wifi_mgr.ctrl.network_mode);
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls start_wifimgr\n",__FUNCTION__, __LINE__);
     if (start_wifimgr() != 0) {
         wifi_util_error_print(WIFI_MGR,"%s: wifimgr start failed\n", __func__);
         return -1;

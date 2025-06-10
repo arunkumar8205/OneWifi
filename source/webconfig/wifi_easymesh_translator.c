@@ -183,6 +183,7 @@ void default_em_device_info(em_device_info_t  *device_info, em_ieee_1905_securit
 webconfig_error_t   translate_device_object_to_easymesh_for_dml(webconfig_subdoc_data_t *data)
 {
     em_device_info_t  *device_info;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     em_network_info_t *network_info;
     em_ieee_1905_security_info_t *security_info;
 
@@ -2564,6 +2565,7 @@ webconfig_error_t  translate_to_easymesh_tables(webconfig_subdoc_type_t type, we
 webconfig_error_t   translate_from_easymesh_tables(webconfig_subdoc_type_t type, webconfig_subdoc_data_t *data)
 {
     if (data == NULL) {
+        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
         wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Input data is NULL\n", __func__, __LINE__);
         return webconfig_error_invalid_subdoc;
     }

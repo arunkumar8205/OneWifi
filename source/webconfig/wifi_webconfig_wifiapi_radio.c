@@ -64,6 +64,7 @@ webconfig_error_t encode_wifiapiradio_subdoc(webconfig_t *config, webconfig_subd
 webconfig_error_t decode_wifiapiradio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     webconfig_subdoc_t  *doc;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj_radios;
     cJSON *obj, *obj_radio;
     unsigned int i, size, radio_index = 0;

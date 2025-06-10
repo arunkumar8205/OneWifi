@@ -333,6 +333,7 @@ static int em_sta_stats_publish(wifi_app_t *app, client_assoc_data_t *stats, int
 {
     webconfig_subdoc_data_t *data;
     raw_data_t rdata;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int rc;
 
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
@@ -743,6 +744,7 @@ static int em_publish_stats_data(channel_scan_response_t *scan_response)
 {
     webconfig_subdoc_data_t *data;
     bus_error_t status;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     char eventName[MAX_EVENT_NAME_SIZE] = { 0 };
     webconfig_subdoc_type_t subdoc_type;
     time_t response_time;
@@ -1319,6 +1321,7 @@ int client_diag_config_to_monitor_queue(wifi_app_t *app, wifi_monitor_data_t *da
 static int ap_report_push_cb(em_ap_report_callback_arg_t *args)
 {
     int rc = RETURN_OK;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int radio_index = 0;
     em_policy_req_type_t policy_type = em_ap_metrics_report_cache[radio_index].args.policy_type;
     webconfig_subdoc_data_t *data = NULL;
@@ -1791,6 +1794,7 @@ static void ap_report_cache_init()
 int handle_em_webconfig_event(wifi_app_t *app, wifi_event_t *event)
 {
     em_config_t *current_policy_cfg = &app->data.u.em_data.em_config;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     int temp_count = 0;
     bool size_change;
     webconfig_subdoc_data_t *webconfig_data = NULL;
@@ -2139,6 +2143,7 @@ void handle_em_command_event(wifi_app_t *app, wifi_event_t *event)
 static int em_beacon_report_publish(bus_handle_t *handle, void *msg_data)
 {
     int rc;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     sta_beacon_report_reponse_t *temp_data_t = NULL;
     webconfig_subdoc_data_t *wb_data = NULL;
     wifi_ctrl_t *ctrl = NULL;
