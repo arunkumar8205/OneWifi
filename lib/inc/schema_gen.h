@@ -111,7 +111,6 @@
         PJS_OVS_BOOL(isolation_enabled) \
         PJS_OVS_INT(mgmt_power_control) \
         PJS_OVS_INT(bss_max_sta) \
-        PJS_OVS_INT(inum_sta) \
         PJS_OVS_BOOL(bss_transition_activated) \
         PJS_OVS_BOOL(nbr_report_activated) \
         PJS_OVS_BOOL(rapid_connect_enabled) \
@@ -144,7 +143,6 @@
         PJS_OVS_STRING(repurposed_vap_name, 64 + 1) \
         PJS_OVS_BOOL(connected_building_enabled) \
         PJS_OVS_BOOL(hostap_mgt_frame_ctrl) \
-        PJS_OVS_BOOL(interop_ctrl) \
         PJS_OVS_BOOL(mbo_enabled) \
         PJS_OVS_BOOL(mld_enable) \
         PJS_OVS_INT(mld_id) \
@@ -2043,7 +2041,6 @@
     COLUMN(isolation_enabled) \
     COLUMN(mgmt_power_control) \
     COLUMN(bss_max_sta) \
-    COLUMN(inum_sta) \
     COLUMN(bss_transition_activated) \
     COLUMN(nbr_report_activated) \
     COLUMN(rapid_connect_enabled) \
@@ -2081,10 +2078,7 @@
     COLUMN(mld_id)\
     COLUMN(mld_link_id)\
     COLUMN(mld_addr)\
-    COLUMN(mld_apply)\
-    COLUMN(interop_ctrl)\
-    COLUMN(mdu_enabled)\
-    COLUMN(speed_tier)
+    COLUMN(mld_apply)
 
 #define SCHEMA__Wifi_Interworking_Config "Wifi_Interworking_Config"
 #define SCHEMA_COLUMN__Wifi_Interworking_Config(COLUMN) \
@@ -3402,7 +3396,6 @@
 #define SCHEMA__Wifi_VAP_Config__isolation_enabled "isolation_enabled"
 #define SCHEMA__Wifi_VAP_Config__mgmt_power_control "mgmt_power_control"
 #define SCHEMA__Wifi_VAP_Config__bss_max_sta "bss_max_sta"
-#define SCHEMA__Wifi_VAP_Config__inum_sta "inum_sta"
 #define SCHEMA__Wifi_VAP_Config__bss_transition_activated "bss_transition_activated"
 #define SCHEMA__Wifi_VAP_Config__nbr_report_activated "nbr_report_activated"
 #define SCHEMA__Wifi_VAP_Config__rapid_connect_enabled "rapid_connect_enabled"
@@ -3435,7 +3428,6 @@
 #define SCHEMA__Wifi_VAP_Config__repurposed_vap_name "repurposed_vap_name"
 #define SCHEMA__Wifi_VAP_Config__connected_building_enabled "connected_building_enabled"
 #define SCHEMA__Wifi_VAP_Config__hostap_mgt_frame_ctrl "hostap_mgt_frame_ctrl"
-#define SCHEMA__Wifi_VAP_Config__interop_ctrl "interop_ctrl"
 #define SCHEMA__Wifi_VAP_Config__mbo_enabled "mbo_enabled"
 #define SCHEMA__Wifi_VAP_Config__mld_enable "mld_enable"
 #define SCHEMA__Wifi_VAP_Config__mld_id "mld_id"
