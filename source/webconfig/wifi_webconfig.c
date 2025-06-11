@@ -203,7 +203,7 @@ webconfig_error_t webconfig_set(webconfig_t *config, webconfig_subdoc_data_t *da
 	wifi_util_error_print(WIFI_CTRL, "%s:%d: [Onewifi crash] access_check_subdoc failed\n", __FUNCTION__, __LINE__);
         return webconfig_error_not_permitted;
     }
-
+    wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] Inside WebConfigset before subdoc decodes: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data->u.encoded.raw);
     if ((data->descriptor & webconfig_data_descriptor_decoded) == webconfig_data_descriptor_decoded) {
     	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Descriptor decoded\n", __FUNCTION__, __LINE__);
 	if ((err = doc->translate_to_subdoc(config, data)) != webconfig_error_none) {
@@ -218,6 +218,7 @@ webconfig_error_t webconfig_set(webconfig_t *config, webconfig_subdoc_data_t *da
 	} else {
 		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - translate_to_subdoc success\n", __FUNCTION__, __LINE__);
 	}
+	    wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] Inside subdoc WebConfigset: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data->u.encoded.raw);
     } else if ((data->descriptor & webconfig_data_descriptor_encoded) == webconfig_data_descriptor_encoded) {
         if ((err = doc->decode_subdoc(config, data)) != webconfig_error_none) {
             wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument decode failed\n", __func__, __LINE__);
@@ -228,6 +229,10 @@ webconfig_error_t webconfig_set(webconfig_t *config, webconfig_subdoc_data_t *da
             wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d Subdocument apply failed\n", __func__, __LINE__);
             err = webconfig_error_apply;
         }
+	else {
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument apply success\n", __FUNCTION__, __LINE__);
+        }
+	    wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] Inside subdoc WebConfigset: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data->u.encoded.raw);
     }
 
 
@@ -252,8 +257,10 @@ static webconfig_error_t translate_from_proto(webconfig_subdoc_type_t type, webc
 {
     wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entry\n", __FUNCTION__, __LINE__);
 #if defined EASY_MESH_NODE || defined EASY_MESH_COLOCATED_NODE
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling translate_from_easymesh_tables()\n", __FUNCTION__, __LINE__);
     return(translate_from_easymesh_tables(type, data));
 #elif ONEWIFI_OVSDB_TABLE_SUPPORT
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling translate_from_ovsdb_tables()\n", __FUNCTION__, __LINE__);
     return(translate_from_ovsdb_tables(type, data));
 #else
     return webconfig_error_none;

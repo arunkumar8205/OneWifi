@@ -55,15 +55,22 @@ webconfig_error_t translate_to_associated_clients_subdoc(webconfig_t *config, we
 {
 	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) || ((data->descriptor & webconfig_data_descriptor_translate_from_easymesh) == webconfig_data_descriptor_translate_from_easymesh)) {
-        if (config->proto_desc.translate_from(webconfig_subdoc_type_associated_clients, data) != webconfig_error_none) {
+        wifi_util_dbg_print(WIFI_CTRL, "%s:%d:[Onewifi crash] Detected translation from OVSDB or EasyMesh\n", __FUNCTION__, __LINE__);
+    	    if (config->proto_desc.translate_from(webconfig_subdoc_type_associated_clients, data) != webconfig_error_none) {
+
             if ((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) {
-                return webconfig_error_translate_from_ovsdb;
+		 {
+		wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Returning translate_from_ovsdb error\n", __FUNCTION__, __LINE__);
+		    return webconfig_error_translate_from_ovsdb;
+		    }
             } else {
+	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Returning translate_from_easymesh error\n", __FUNCTION__, __LINE__);
+
                 return webconfig_error_translate_from_easymesh;
             }
         }
     } else if ((data->descriptor & webconfig_data_descriptor_translate_from_tr181) == webconfig_data_descriptor_translate_from_tr181) {
-
+        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Detected translation from TR-181 (Not implemented)\n", __FUNCTION__, __LINE__);
     } else {
         // no translation required
     }

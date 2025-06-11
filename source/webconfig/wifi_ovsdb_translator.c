@@ -7741,6 +7741,8 @@ webconfig_error_t   translate_to_ovsdb_tables(webconfig_subdoc_type_t type, webc
 
 webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, webconfig_subdoc_data_t *data)
 {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entry\n", __FUNCTION__, __LINE__);
+
     if (data == NULL) {
         wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Input data is NULL\n", __func__, __LINE__);
         return webconfig_error_invalid_subdoc;
@@ -7751,6 +7753,8 @@ webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, we
         case webconfig_subdoc_type_private:
             if (translate_vap_object_from_ovsdb_vif_config_for_private(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_private vap_object translation from ovsdb failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_private vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
                 return webconfig_error_translate_from_ovsdb;
             }
         break;
@@ -7758,13 +7762,16 @@ webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, we
         case webconfig_subdoc_type_home:
             if (translate_vap_object_from_ovsdb_vif_config_for_home(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_home vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_home vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_xfinity:
             if (translate_vap_object_from_ovsdb_vif_config_for_xfinity(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_xfinity vap_object translation from ovsdb failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_xfinity vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
                 return webconfig_error_translate_from_ovsdb;
             }
         break;
@@ -7772,42 +7779,54 @@ webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, we
         case webconfig_subdoc_type_lnf:
             if (translate_vap_object_from_ovsdb_vif_config_for_lnf(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_lnf vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_lnf vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_radio:
             if (translate_radio_object_from_ovsdb_radio_config_for_radio(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_radio radio_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+               wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_radio radio_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+	       	return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_mesh_sta:
             if (translate_vap_object_from_ovsdb_vif_config_for_mesh_sta(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_mesh_sta vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_mesh_sta vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_mesh:
             if (translate_vap_object_from_ovsdb_vif_config_for_mesh(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_mesh vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_mesh_sta vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_mesh_backhaul:
             if (translate_vap_object_from_ovsdb_vif_config_for_mesh_backhaul(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_mesh_backhaul vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_mesh_backhaul vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_mesh_backhaul_sta:
             if (translate_vap_object_from_ovsdb_vif_config_for_mesh_sta(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_mesh_backhaul_sta vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_mesh_backhaul_sta vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
@@ -7815,52 +7834,64 @@ webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, we
             // translate rif, vif tables for all rows
             if (translate_radio_object_from_ovsdb_radio_config_for_dml(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_dml radio_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_dml radio_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
 
             if (translate_vap_object_from_ovsdb_vif_config_for_dml(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_dml vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_dml vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_mac_filter:
             if (translate_vap_object_from_ovsdb_vif_config_for_macfilter(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_mac_filter vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_mac_filter vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_blaster:
             if (translate_config_from_ovsdb_for_blaster_config(data) != webconfig_error_none) {
                 wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: Blaster config translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+               wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Blaster config translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+	       	return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_stats_config:
             if (translate_config_from_ovsdb_for_stats_config(data) != webconfig_error_none) {
                 wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+               wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+	       	return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_steering_config:
             if (translate_config_from_ovsdb_for_steering_config(data) != webconfig_error_none) {
                 wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: vap_object translation from ovsdb failed\n", __func__, __LINE__);
-                return webconfig_error_translate_from_ovsdb;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+
+		return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_steering_clients:
             if (translate_config_from_ovsdb_for_steering_clients(data) != webconfig_error_none) {
-                wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: vap_object translation from ovsdb failed\n", __func__, __LINE__);
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
+    		    wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: vap_object translation from ovsdb failed\n", __func__, __LINE__);
                 return webconfig_error_translate_from_ovsdb;
             }
         break;
 
         case webconfig_subdoc_type_vif_neighbors:
             if (translate_config_from_ovsdb_for_vif_neighbors(data) != webconfig_error_none) {
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
                 wifi_util_dbg_print(WIFI_WEBCONFIG, "%s:%d: vap_object translation from ovsdb failed\n", __func__, __LINE__);
                 return webconfig_error_translate_from_ovsdb;
             }
@@ -7869,6 +7900,7 @@ webconfig_error_t   translate_from_ovsdb_tables(webconfig_subdoc_type_t type, we
         case webconfig_subdoc_type_null:
             if (translate_vap_object_from_ovsdb_config_for_null(data) != webconfig_error_none) {
                 wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: webconfig_subdoc_type_null vap_object translation from ovsdb failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - webconfig_subdoc_type_null vap_object translation from ovsdb failed\n", __FUNCTION__, __LINE__);
                 return webconfig_error_translate_from_ovsdb;
             }
         break;
