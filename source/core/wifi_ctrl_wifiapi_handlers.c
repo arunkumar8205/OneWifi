@@ -670,7 +670,7 @@ static void wifiapi_handle_get_ApAssocDeviceDiagnosticResult(char **args, unsign
 void process_wifiapi_command(char *command, unsigned int len)
 {
     char input[1024];
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     unsigned int num_args = 0, i, found = 0, ret;
     unsigned int radio_index = 0, vap_index, vap_array_index = 0;
     char *args[10];

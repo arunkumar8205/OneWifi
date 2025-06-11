@@ -699,7 +699,7 @@ int init(webconfig_dml_t *consumer)
     webconfig_subdoc_data_t data;
     char *dbg_str;
     raw_data_t raw_data;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d:Enters [Onewifi crash] WIFI_WEBCONFIG_INIT_DML_DATA\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - WIFI_WEBCONFIG_INIT_DML_DATA\n", __FUNCTION__, __LINE__);
     memset(&raw_data, 0, sizeof(raw_data));
 
     bus_dmlwebconfig_register(consumer);
@@ -720,13 +720,13 @@ int init(webconfig_dml_t *consumer)
         return -1;
     }
     //Initialize Webconfig Framework
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Initialize Webconfig Framework\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Initialize Webconfig Framework %s:%d \n",__FUNCTION__, __LINE__);
     consumer->webconfig.initializer = webconfig_initializer_dml;
     consumer->webconfig.apply_data = (webconfig_apply_data_t)webconfig_dml_apply;
 
     if (webconfig_init(&consumer->webconfig) != webconfig_error_none) {
         wifi_util_error_print(WIFI_DMCLI,"[%s]:%d Init WiFi Web Config  fail\n",__FUNCTION__,__LINE__);
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Initialize Webconfig Framework failed\n",__FUNCTION__, __LINE__);
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Initialize Webconfig Framework failed %s:%d \n",__FUNCTION__, __LINE__);
         // unregister and deinit everything
         if (raw_data.raw_data.bytes) {
             get_bus_descriptor()->bus_data_free_fn(&raw_data);
@@ -753,7 +753,7 @@ int init(webconfig_dml_t *consumer)
     wifi_util_info_print(WIFI_DMCLI,
         "%s %d bus_data_get_fn WIFI_WEBCONFIG_INIT_DML_DATA successfull \n", __FUNCTION__,
         __LINE__);
-        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] wifi_webconfig_INIT_DML_DATA successfull\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - WIFI_WEBCONFIG_INIT_DML_SUCCESS\n", __FUNCTION__, __LINE__);
     if (str == NULL) {
         wifi_util_error_print(WIFI_DMCLI, "%s Null pointer, bus set string len=%d\n", __FUNCTION__,
             len);
@@ -784,10 +784,10 @@ int init(webconfig_dml_t *consumer)
     if (webconfig_decode(&consumer->webconfig, &data, str) == webconfig_error_none) {
         wifi_util_info_print(WIFI_DMCLI, "%s %d webconfig_decode success \n", __FUNCTION__,
             __LINE__);
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] webconfig decode_success\n",__FUNCTION__, __LINE__);
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] webconfig decode_success : %s:%d \n",__FUNCTION__, __LINE__);
     } else {
         wifi_util_error_print(WIFI_DMCLI, "%s %d webconfig_decode fail \n", __FUNCTION__, __LINE__);
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Webconfig decode fail\n",__FUNCTION__, __LINE__);
+	    wifi_util_dbg_print(WIFI_CTRL, "Webconfig decode fail %s:%d: [Onewifi crash]\n",__FUNCTION__, __LINE__);
         get_bus_descriptor()->bus_data_free_fn(&raw_data);
 
         return 0;

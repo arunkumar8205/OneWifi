@@ -110,7 +110,7 @@ static int get_subdoc_type(wifi_provider_response_t *response, webconfig_subdoc_
 int stats_bus_publish(wifi_ctrl_t *ctrl, void *stats_data)
 {
     webconfig_subdoc_data_t *data;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     int rc;
     bus_error_t status;
     char eventName[MAX_EVENT_NAME_SIZE] = { 0 };
@@ -553,7 +553,7 @@ int set_managed_guest_interfaces(char *interface_name, int radio_index)
 bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data, bus_user_data_t *user_data)
 {
     (void)user_data;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] ###Enters###: %s:%d\n", __FUNCTION__, __LINE__);
     webconfig_subdoc_data_t data;
     wifi_mgr_t *mgr = (wifi_mgr_t *)get_wifimgr_obj();
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
@@ -564,8 +564,8 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
     if (!ctrl->ctrl_initialized) {
         wifi_util_dbg_print(WIFI_CTRL, "%s:%d: Ctrl not initialized skip request.\n", __FUNCTION__,
             __LINE__);
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] returned bus_error_invalid_operation Ctrl not initialized skip request \n",__FUNCTION__, __LINE__);
-        return bus_error_invalid_operation;
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Ctrl not initialized (request skipped)\n", __FUNCTION__, __LINE__);
+	return bus_error_invalid_operation;
     }
     if (ctrl->network_mode == rdk_dev_mode_type_gw) {
         if ((sync_retries < MAX_ACSD_SYNC_TIME_WAIT)) {
@@ -575,8 +575,8 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
                 wifi_util_info_print(WIFI_CTRL,
                     "%s:%d: sync_retries=%d wifidb and global radio config not updated\n",
                     __FUNCTION__, __LINE__, sync_retries);
-		wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] returned bus_error_invalid_operation wifidb and global radio config not updated \n",__FUNCTION__, __LINE__);
-                return bus_error_invalid_operation;
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - BUS_ERR_INVALID_OP | wifidb+radio_cfg not updated\n", __FUNCTION__, __LINE__);
+		return bus_error_invalid_operation;
             }
         }
         wifi_util_info_print(WIFI_CTRL,
@@ -598,8 +598,8 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
         data.u.decoded.num_radios = num_of_radios;
         // tell webconfig to encode
         webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
-	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash]After webconfig_encode, data.u.encoded.raw=%p\n",__FUNCTION__, __LINE__, data.u.encoded.raw);
-        if (data.u.encoded.raw == NULL) {
+	wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] After WebConfigEncode: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data.u.encoded.raw);
+	if (data.u.encoded.raw == NULL) {
 	    	wifi_util_error_print(WIFI_CTRL, "%s:%d: encoded.raw is NULL\n", __func__, __LINE__);
     	}
 	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: First few bytes: %.10s\n", __func__, __LINE__, data.u.encoded.raw);
@@ -940,7 +940,7 @@ bus_error_t get_assoc_clients_data(char *event_name, raw_data_t *p_data, bus_use
 bus_error_t get_null_subdoc_data(char *name, raw_data_t *p_data, bus_user_data_t *user_data)
 {
     (void)user_data;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     webconfig_subdoc_data_t data;
     wifi_mgr_t *mgr = (wifi_mgr_t *)get_wifimgr_obj();
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
@@ -3099,7 +3099,7 @@ bus_error_t set_force_vap_apply(char *name, raw_data_t *p_data, bus_user_data_t 
 void bus_register_handlers(wifi_ctrl_t *ctrl)
 {
     int rc = bus_error_success;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls webconfig_init_data_get_subdoc\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d calls (webconfig_init_data_get_subdoc)\n", __FUNCTION__, __LINE__);
     char *component_name = "WifiCtrl";
     int num_of_radio = getNumberRadios();
     int num_of_vaps = getTotalNumberVAPs(NULL);

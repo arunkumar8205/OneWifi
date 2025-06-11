@@ -149,7 +149,7 @@ int webconfig_blaster_apply(wifi_ctrl_t *ctrl, webconfig_subdoc_decoded_data_t *
 void webconfig_init_subdoc_data(webconfig_subdoc_data_t *data)
 {
     wifi_mgr_t *mgr = get_wifimgr_obj();
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     memset(data, 0, sizeof(webconfig_subdoc_data_t));
     memcpy((unsigned char *)&data->u.decoded.radios, (unsigned char *)&mgr->radio_config, getNumberRadios()*sizeof(rdk_wifi_radio_t));
     memcpy((unsigned char *)&data->u.decoded.config, (unsigned char *)&mgr->global_config, sizeof(wifi_global_config_t));

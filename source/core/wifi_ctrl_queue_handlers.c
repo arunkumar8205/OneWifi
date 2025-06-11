@@ -3712,8 +3712,8 @@ void handle_monitor_event(wifi_ctrl_t *ctrl, void *data, unsigned int len, wifi_
 {
     switch (subtype) {
         case wifi_event_type_collect_stats:
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls stats_bus_publish\n",__FUNCTION__, __LINE__);
-	    if (data == NULL) {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - stats_bus_publish\n", __FUNCTION__, __LINE__);
+		if (data == NULL) {
 		    wifi_util_error_print(WIFI_CTRL, "%s:%d: data is NULL\n", __func__, __LINE__);
 		    return;
 	    }

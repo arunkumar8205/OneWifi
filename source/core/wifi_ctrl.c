@@ -337,7 +337,6 @@ void ctrl_queue_loop(wifi_ctrl_t *ctrl)
                         break;
 
                     case wifi_event_type_monitor:
-			wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls handle_monitor_event\n",__FUNCTION__, __LINE__);
                         handle_monitor_event(ctrl, event->u.core_data.msg, event->u.core_data.len, event->sub_type);
                         // TODO: event 4 flood
                         // wifi_util_dbg_print(WIFI_CTRL,"[%s]: Received monitor Event %d\r\n",__FUNCTION__, event->event_type);
@@ -1285,7 +1284,7 @@ void channel_change_callback(wifi_channel_change_event_t radio_channel_param)
 int init_wifi_ctrl(wifi_ctrl_t *ctrl)
 {
     unsigned int i;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entry\n", __FUNCTION__, __LINE__);
     pthread_condattr_t cond_attr;
 
     ctrl->db_consolidated = (0 == access("/tmp/db_consolidated", F_OK));
@@ -1348,7 +1347,7 @@ int init_wifi_ctrl(wifi_ctrl_t *ctrl)
     }
 
     //Register to BUS for webconfig interactions
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls bus_register_handlers\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - bus_register_handlers\n", __FUNCTION__, __LINE__);
     bus_register_handlers(ctrl);
 
     // subscribe for BUS events
@@ -1743,7 +1742,7 @@ int start_wifi_ctrl(wifi_ctrl_t *ctrl)
     webconfig_send_full_associate_status(ctrl);
     ctrl->exit_ctrl = false;
     ctrl->ctrl_initialized = true;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters and calls ctrl_queu_loop\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - ctrl_queue_loop\n", __FUNCTION__, __LINE__);
     ctrl_queue_loop(ctrl);
 
 #ifdef ONEWIFI_ANALYTICS_APP_SUPPORT

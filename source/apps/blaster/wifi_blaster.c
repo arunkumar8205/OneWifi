@@ -2183,7 +2183,7 @@ int webconfig_blaster_app_apply(wifi_ctrl_t *ctrl, webconfig_subdoc_decoded_data
 void process_blaster(wifi_app_t *app, wifi_event_t *event)
 {
     int ret = RETURN_OK;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entry\n", __FUNCTION__, __LINE__);
     wifi_util_dbg_print(WIFI_BLASTER,"%s:%d Entering \n", __func__, __LINE__);
     webconfig_subdoc_data_t *data = NULL;
     data = event->u.webconfig_data;

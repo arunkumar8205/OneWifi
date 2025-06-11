@@ -914,7 +914,6 @@ void cac_mgmt_frame_event(wifi_app_t *app, frame_data_t *msg, int type)
 int cac_event_webconfig_set_data(wifi_app_t *apps, webconfig_subdoc_data_t *doc, wifi_event_subtype_t sub_type)
 {
     webconfig_subdoc_decoded_data_t *decoded_params = NULL;
-    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (doc == NULL) {
        /*Note : This is not error case, but this check is used to denote webconfig_set_data event
         * is received by the handle_webconfig_event() function and decode is not happened yet
