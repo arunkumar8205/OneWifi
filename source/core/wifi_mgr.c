@@ -68,11 +68,13 @@ wifi_db_t *get_wifidb_obj(void)
 
 wifi_ctrl_t *get_wifictrl_obj(void)
 {
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     return &g_wifi_mgr.ctrl;
 }
 
 wifi_mgr_t *get_wifimgr_obj(void)
 {
+wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] Enters: %s:%d\n", __FUNCTION__, __LINE__);
     return &g_wifi_mgr;
 }
 
