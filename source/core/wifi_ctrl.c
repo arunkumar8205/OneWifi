@@ -1704,54 +1704,81 @@ int validate_and_sync_private_vap_credentials()
 int start_wifi_ctrl(wifi_ctrl_t *ctrl)
 {
     int monitor_ret = 0;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s() Enters :%d\n", __FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling init_wifi_monitor()\n", __FUNCTION__, __LINE__);
 
     monitor_ret = init_wifi_monitor();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - init_wifi_monitor() returned: %d\n", __FUNCTION__, __LINE__, monitor_ret);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling start_wifi_services()\n", __FUNCTION__, __LINE__);
 
     start_wifi_services();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling init_wireless_interface_mac()\n", __FUNCTION__, __LINE__);
 
     init_wireless_interface_mac();
 
 
     ctrl->webconfig_state = ctrl_webconfig_state_vap_all_cfg_rsp_pending;
+
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling telemetry_bootup_time_wifibroadcast()\n", __FUNCTION__, __LINE__);
     telemetry_bootup_time_wifibroadcast(); //Telemetry Marker for btime_wifibcast_split
 
     /* Check for whether Log_Upload was enabled or not
        If Enabled add cron job to do log upload */
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling check_log_upload_cron_job()\n", __FUNCTION__, __LINE__);
     check_log_upload_cron_job();
 
     /* start wifi apps */
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling wifi_hal_platform_post_init()\n", __FUNCTION__, __LINE__);
+
     wifi_hal_platform_post_init();
 
     if (monitor_ret == 0) {
         //Start Wifi Monitor Thread
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling start_wifi_health_monitor_thread()\n", __FUNCTION__, __LINE__);
+
         start_wifi_health_monitor_thread();
     } else {
         wifi_util_error_print(WIFI_CTRL,"%s:%d Failed to start Wifi Monitor\n", __func__, __LINE__);
     }
 
 #ifdef ONEWIFI_ANALYTICS_APP_SUPPORT
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling apps_mgr_analytics_event(start)\n", __FUNCTION__, __LINE__);
+
     apps_mgr_analytics_event(&ctrl->apps_mgr, wifi_event_type_exec, wifi_event_exec_start, NULL);
 #endif
 
 #ifdef ONEWIFI_CAC_APP_SUPPORT
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling apps_mgr_cac_event(start)\n", __FUNCTION__, __LINE__);
+
     apps_mgr_cac_event(&ctrl->apps_mgr, wifi_event_type_exec, wifi_event_exec_start, NULL, 0);
 #endif
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling ctrl_queue_timeout_scheduler_tasks()\n", __FUNCTION__, __LINE__);
 
     ctrl_queue_timeout_scheduler_tasks(ctrl);
     ctrl->webconfig_state = ctrl_webconfig_state_associated_clients_full_cfg_rsp_pending;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling webconfig_send_full_associate_status()\n", __FUNCTION__, __LINE__);
+
     webconfig_send_full_associate_status(ctrl);
     ctrl->exit_ctrl = false;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Setting ctrl->ctrl_initialized = true\n", __FUNCTION__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling ctrl_queue_loop()\n", __FUNCTION__, __LINE__);
+
     ctrl->ctrl_initialized = true;
     wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - ctrl_queue_loop\n", __FUNCTION__, __LINE__);
     ctrl_queue_loop(ctrl);
 
 #ifdef ONEWIFI_ANALYTICS_APP_SUPPORT
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling apps_mgr_analytics_event(stop)\n", __FUNCTION__, __LINE__);
+
     apps_mgr_analytics_event(&ctrl->apps_mgr, wifi_event_type_exec, wifi_event_exec_stop, NULL);
 #endif
 
 #ifdef ONEWIFI_CAC_APP_SUPPORT
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling apps_mgr_cac_event(stop)\n", __FUNCTION__, __LINE__);
+
     apps_mgr_cac_event(&ctrl->apps_mgr, wifi_event_type_exec, wifi_event_exec_stop, NULL, 0);
-#endif
+#endif  
+
     wifi_util_info_print(WIFI_CTRL,"%s:%d Exited queue_wifi_ctrl_task.\n",__FUNCTION__,__LINE__);
     return RETURN_OK;
 }
