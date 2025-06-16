@@ -192,7 +192,7 @@ static bus_error_t bus_set_string(bus_handle_t *handle, char const *name, char c
     he_bus_error_t rc;
     he_bus_handle_t p_bus_handle = handle->u.he_bus_handle;
     he_bus_raw_data_t raw_data = { 0 };
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters and set raw_data.data_type \n", __FUNCTION__, __LINE__); 
     raw_data.data_type = he_bus_data_type_string;
     raw_data.raw_data.bytes = param_str;
     raw_data.raw_data_len = (uint32_t)(strlen(param_str) + 1);

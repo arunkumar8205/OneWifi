@@ -1679,6 +1679,7 @@ int validate_and_sync_private_vap_credentials()
         wifi_util_info_print(WIFI_CTRL, "Private vaps credentials= %d and reboot reason =%s\n",
             default_private_credentials, pTmp);
         if (default_private_credentials) {
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
             rc = get_bus_descriptor()->bus_set_string_fn(&g_wifi_mgr->ctrl.handle,
                 SUBDOC_FORCE_RESET, PRIVATE_SUB_DOC);
             if (rc != bus_error_success) {

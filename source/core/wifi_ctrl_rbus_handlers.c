@@ -246,6 +246,7 @@ int notify_associated_entries(wifi_ctrl_t *ctrl, int ap_index, ULONG new_count, 
         "Device.WiFi.AccessPoint.%d.AssociatedDeviceNumberOfEntries,%d,%lu,%lu,%d", ap_index + 1, 0,
         new_count, old_count, 2);
     wifi_util_info_print(WIFI_CTRL, "%s:%d: Sending Notification for str:%s \n", __func__, __LINE__, str);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_NOTIFY_SYNC_COMPONENT,
         str);
     if (rc != bus_error_success) {
@@ -278,6 +279,7 @@ int notify_force_disassociation(wifi_ctrl_t *ctrl, int ap_index, char *threshold
         strncpy(vap_info->u.bss_info.postassoc.client_force_disassoc_info, str,
             sizeof(vap_info->u.bss_info.postassoc.client_force_disassoc_info));
     }
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_NOTIFY_FORCE_DISASSOCIATION,
         str);
@@ -312,6 +314,7 @@ int notify_deny_association(wifi_ctrl_t *ctrl, int ap_index, char *threshold, ma
         strncpy(vap_info->u.bss_info.preassoc.client_deny_assoc_info, str,
             sizeof(vap_info->u.bss_info.preassoc.client_deny_assoc_info));
     }
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_NOTIFY_DENY_ASSOCIATION, str);
     if (rc != bus_error_success) {
@@ -337,6 +340,7 @@ int notify_hotspot(wifi_ctrl_t *ctrl, assoc_dev_data_t *assoc_device)
     to_mac_str(assoc_device->dev_stats.cli_MACAddress, mac_str);
     snprintf(str, sizeof(str), "%d|%d|%d|%s", assoc_device->dev_stats.cli_Active,
         assoc_device->ap_index + 1, assoc_device->dev_stats.cli_RSSI, mac_str);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_HOTSPOT_NOTIFY, str);
     if (rc != bus_error_success) {
@@ -366,6 +370,7 @@ int notify_LM_Lite(wifi_ctrl_t *ctrl, LM_wifi_hosts_t *phosts, bool sync)
                 "NULL",
             ('\0' != phosts->host[0].ssid[0]) ? (char *)phosts->host[0].ssid : "NULL",
             phosts->host[0].RSSI, (phosts->host[0].Status == TRUE) ? 1 : 0);
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
         rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_LMLITE_NOTIFY, str);
         if (rc != bus_error_success) {
@@ -381,6 +386,7 @@ int notify_LM_Lite(wifi_ctrl_t *ctrl, LM_wifi_hosts_t *phosts, bool sync)
                     "NULL",
                 ('\0' != phosts->host[itr].ssid[0]) ? (char *)phosts->host[0].ssid : "NULL",
                 phosts->host[itr].RSSI, (phosts->host[itr].Status == TRUE) ? 1 : 0);
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
             rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_LMLITE_NOTIFY, str);
             if (rc != bus_error_success) {
@@ -417,6 +423,7 @@ int tcm_notify_deny_association(wifi_ctrl_t *ctrl, int ap_index, mac_addr_str_t 
         strncpy(vap_info->u.bss_info.preassoc.tcm_client_deny_assoc_info, str,
             sizeof(vap_info->u.bss_info.preassoc.tcm_client_deny_assoc_info));
     }
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
 
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_NOTIFY_DENY_TCM_ASSOCIATION,
         str);
@@ -441,6 +448,8 @@ int notify_wifi_sec_mode_enabled(wifi_ctrl_t *ctrl, int ap_index, char *old_mode
     snprintf(str, sizeof(str),"Device.WiFi.AccessPoint.%d.Security.ModeEnabled,16,%s,%s,2",(ap_index + 1), new_mode, old_mode);
 
     wifi_util_info_print(WIFI_CTRL, "%s:%d: sending str %s as notification to WIFI_NOTIFY_SYNC_COMPONENT\n", __func__, __LINE__, str);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
+
     rc = get_bus_descriptor()->bus_set_string_fn(&ctrl->handle, WIFI_NOTIFY_SYNC_COMPONENT, str);
     if (rc != bus_error_success) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d: bus: bus_set_string_fn Failed %d\n", __func__,
@@ -540,6 +549,8 @@ int set_managed_guest_interfaces(char *interface_name, int radio_index)
     char str[48];
     memset(str, 0, sizeof(str));
     snprintf(str, sizeof(str), "Device.LAN.Bridge.%d.WiFiInterfaces", radio_index + 1);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calls bus_set_string_fn \n", __FUNCTION__, __LINE__);
+
     rc = get_bus_descriptor()->bus_set_string_fn(&g_wifi_mgr->ctrl.handle, str, interface_name);
     if (rc != bus_error_success) {
         wifi_util_error_print(WIFI_CTRL, "Failed to set %s with %s \n", str, interface_name);
