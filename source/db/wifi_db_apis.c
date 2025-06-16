@@ -6959,16 +6959,7 @@ int wifidb_init_vap_config_default(int vap_index, wifi_vap_info_t *config,
         wifi_util_dbg_print(WIFI_DB, "%s:%d vap_index:%d hostap_mgt_frame_ctrl:%d\n", __func__,
             __LINE__, vap_index, cfg.u.bss_info.hostap_mgt_frame_ctrl);
 #endif // defined(_XB7_PRODUCT_REQ_) || defined(_XB8_PRODUCT_REQ_) || defined(_XB10_PRODUCT_REQ_) ||
-<<<<<<< HEAD
-       // defined(_SCER11BEL_PRODUCT_REQ_) || defined(_CBR2_PRODUCT_REQ_) || defined(_SR213_PRODUCT_REQ_)
-       
-        cfg.u.bss_info.interop_ctrl = false;
-        cfg.u.bss_info.inum_sta = 0;
-        wifi_util_dbg_print(WIFI_DB, "%s:%d vap_index:%d interop_ctrl:%d inum_sta:%d \n", __func__,
-            __LINE__, vap_index, cfg.u.bss_info.interop_ctrl, cfg.u.bss_info.inum_sta);
-=======
        // defined(_SCER11BEL_PRODUCT_REQ_) || defined(_CBR2_PRODUCT_REQ_)
->>>>>>> Revert "Merge pull request #376 from HarshavardhanP1/interop_resolve"
 
         memset(ssid, 0, sizeof(ssid));
 

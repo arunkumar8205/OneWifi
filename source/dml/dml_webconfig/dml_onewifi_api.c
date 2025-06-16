@@ -712,16 +712,19 @@ int init(webconfig_dml_t *consumer)
     raw_data_t raw_data;
     wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - WIFI_WEBCONFIG_INIT_DML_DATA\n", __FUNCTION__, __LINE__);
     memset(&raw_data, 0, sizeof(raw_data));
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - WIFI_WEBCONFIG_INIT_DML_DATA param = %s\n",__FUNCTION__, __LINE__, paramNames[0]);
     bus_dmlwebconfig_register(consumer);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Calling bus_data_get_fn for param: %s\n",__FUNCTION__, __LINE__, paramNames[0]);
     rc = get_bus_descriptor()->bus_data_get_fn(&consumer->handle, paramNames[0], &raw_data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Returned from bus_data_get_fn, rc = %d\n",__FUNCTION__, __LINE__, rc);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - raw_data.data_type = 0x%x \n",__FUNCTION__, __LINE__, raw_data.data_type);
     if (raw_data.data_type != bus_data_type_string) {
-        wifi_util_error_print(WIFI_CTRL,
-            "%s:%d '%s' bus_data_get_fn failed with data_type:0x%x, rc:%d\n", __func__, __LINE__,
-            paramNames[0], raw_data.data_type, rc);
+        wifi_util_error_print(WIFI_CTRL,"[Onewifi crash] %s:%d '%s' bus_data_get_fn failed with data_type:0x%x, rc:%d\n", __func__, __LINE__,paramNames[0], raw_data.data_type, rc);
 	wifi_util_dbg_print(WIFI_CTRL,"%s:%d: [Onewifi crash] bus_data_get_fn_failed with data_type:0x%x, rc:%d\n",__func__, __LINE__, raw_data.data_type, rc);
         return rc;
     }
+    wifi_util_dbg_print(WIFI_CTRL,"%s:%d: [Onewifi crash] [Outside] bus_data_get_fn_failed with data_type:0x%x, rc:%d\n",__func__, __LINE__, raw_data.data_type, rc);
+
     str = (char *)raw_data.raw_data.bytes;
     len = raw_data.raw_data_len;
     if (rc != bus_error_success || str == NULL) {
