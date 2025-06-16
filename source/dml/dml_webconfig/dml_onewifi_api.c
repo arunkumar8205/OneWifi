@@ -497,6 +497,7 @@ void bus_dmlwebconfig_register(webconfig_dml_t *consumer)
 {
     int rc = bus_error_success;
     char *component_name = "WebconfigDML";
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Entering bus_dmlwebconfig_register\n", __func__, __LINE__);
 
     bus_event_sub_t bus_events[] = {
         { WIFI_WEBCONFIG_DOC_DATA_NORTH, NULL, 0, 0, set_webconfig_dml_data, NULL, NULL, NULL,
@@ -507,23 +508,33 @@ void bus_dmlwebconfig_register(webconfig_dml_t *consumer)
             WIFI_WEBCONFIG_GET_ASSOC,  NULL, 0, 0, set_webconfig_dml_data, NULL, NULL, NULL, false
         }
     };
-
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Calling bus_open_fn for component: %s\n", __func__, __LINE__, component_name);
     wifi_util_dbg_print(WIFI_DMCLI, "%s bus_open_fn open \n", __FUNCTION__);
     rc = get_bus_descriptor()->bus_open_fn(&consumer->handle, component_name);
     if (rc != bus_error_success) {
+        wifi_util_error_print(WIFI_CTRL, "%s:%d: [Onewifi crash] bus_open_fn failed for component: %s, rc: %d\n", __func__, __LINE__, component_name, rc);
+
         wifi_util_error_print(WIFI_DMCLI, "%s:%d bus: bus_open_fn open failed for component:%s, rc:%d\n",
 	 __func__, __LINE__, component_name, rc);
         return;
     }
+
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] bus_open_fn succeeded for component: %s\n", __func__, __LINE__, component_name);
+
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Subscribing to %zu bus events\n", __func__, __LINE__, ARRAY_SIZE(bus_events));
 
     wifi_util_info_print(WIFI_DMCLI, "%s  bus open success\n", __FUNCTION__);
     rc = get_bus_descriptor()->bus_event_subs_ex_fn(&consumer->handle, bus_events,
         ARRAY_SIZE(bus_events), 0);
 
     if (rc != bus_error_success) {
+	    wifi_util_error_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Failed to subscribe to bus events, rc: %d\n", __func__, __LINE__, rc);
+
         wifi_util_error_print(WIFI_DMCLI,
             "Unable to subscribe to event  with bus error code : %d\n", rc);
     }
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Exiting bus_dmlwebconfig_register\n", __func__, __LINE__);
+
     return;
 }
 
@@ -708,7 +719,7 @@ int init(webconfig_dml_t *consumer)
         wifi_util_error_print(WIFI_CTRL,
             "%s:%d '%s' bus_data_get_fn failed with data_type:0x%x, rc:%d\n", __func__, __LINE__,
             paramNames[0], raw_data.data_type, rc);
-	    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] bus_data_get_fn_failed with data_type:0x\n",__FUNCTION__, __LINE__);
+	wifi_util_dbg_print(WIFI_CTRL,"%s:%d: [Onewifi crash] bus_data_get_fn_failed with data_type:0x%x, rc:%d\n",__func__, __LINE__, raw_data.data_type, rc);
         return rc;
     }
     str = (char *)raw_data.raw_data.bytes;
