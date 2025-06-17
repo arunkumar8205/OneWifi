@@ -2331,8 +2331,8 @@ bool should_process_hotspot_config_change(const wifi_vap_info_t *lnf_vap_info,
     bool result = (is_mdu_enabled &&
                   is_secure_hotspot &&
                   (vap_enabled_changed || radius_config_changed));
-    
-    wifi_util_info_print(WIFI_CTRL, "%s: vap_name is %s and bool is %d:%d:%d:%d:%d:%s - result=%s\n", 
+    //debug print crash
+    /*wifi_util_info_print(WIFI_CTRL, "%s: vap_name is %s and bool is %d:%d:%d:%d:%d:%s - result=%s\n", 
                         __func__,
                         hotspot_vap_info->vap_name ? hotspot_vap_info->vap_name : "NULL",
                         is_mdu_enabled ? 1 : 0,
@@ -2340,7 +2340,7 @@ bool should_process_hotspot_config_change(const wifi_vap_info_t *lnf_vap_info,
                         vap_enabled_changed ? 1 : 0,
                         radius_config_changed ? 1 : 0,
                         (vap_enabled_changed || radius_config_changed) ? 1 : 0,
-                        result ? "true" : "false");
+                        result ? "true" : "false");*/
     
     wifi_util_dbg_print(WIFI_CTRL, "%s: Exit - returning %s\n", __func__, result ? "true" : "false");
     
