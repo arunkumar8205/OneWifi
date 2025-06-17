@@ -207,11 +207,14 @@ webconfig_error_t webconfig_set(webconfig_t *config, webconfig_subdoc_data_t *da
     if ((data->descriptor & webconfig_data_descriptor_decoded) == webconfig_data_descriptor_decoded) {
     	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Descriptor decoded\n", __FUNCTION__, __LINE__);
 	if ((err = doc->translate_to_subdoc(config, data)) != webconfig_error_none) {
-            wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument translation failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument translation failed \n", __FUNCTION__, __LINE__);
+    		wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument translation failed\n", __func__, __LINE__);
         } else if ((err = doc->encode_subdoc(config, data)) != webconfig_error_none) {
-            wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument encode failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument encode failed\n", __FUNCTION__, __LINE__);
+	       	wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument encode failed\n", __func__, __LINE__);
         } else if ((data->descriptor = webconfig_data_descriptor_encoded)
                     && (config->apply_data(doc, data)) != webconfig_error_none) {
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument apply failed\n", __FUNCTION__, __LINE__);
             wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d Subdocument apply failed\n", __func__, __LINE__);
             err = webconfig_error_apply;
 	    wifi_util_error_print(WIFI_CTRL, "%s:%d: [Onewifi crash] translate_to_subdoc failed\n", __FUNCTION__, __LINE__);
@@ -221,12 +224,15 @@ webconfig_error_t webconfig_set(webconfig_t *config, webconfig_subdoc_data_t *da
 	    wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] Inside subdoc WebConfigset: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data->u.encoded.raw);
     } else if ((data->descriptor & webconfig_data_descriptor_encoded) == webconfig_data_descriptor_encoded) {
         if ((err = doc->decode_subdoc(config, data)) != webconfig_error_none) {
-            wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument decode failed\n", __func__, __LINE__);
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument decode failed\n", __FUNCTION__, __LINE__);
+    		wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument decode failed\n", __func__, __LINE__);
         } else if ((err = doc->translate_from_subdoc(config, data)) != webconfig_error_none) {
-            wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument translation failed\n", __func__, __LINE__);
+                    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d Subdocument translation failed \n", __FUNCTION__, __LINE__);
+		wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Subdocument translation failed\n", __func__, __LINE__);
         } else if ((data->descriptor = webconfig_data_descriptor_decoded)
                     && (config->apply_data(doc, data)) != webconfig_error_none) {
-            wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d Subdocument apply failed\n", __func__, __LINE__);
+                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument apply failed\n", __FUNCTION__, __LINE__);    
+		wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d Subdocument apply failed\n", __func__, __LINE__);
             err = webconfig_error_apply;
         }
 	else {
