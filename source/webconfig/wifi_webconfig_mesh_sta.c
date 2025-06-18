@@ -81,6 +81,8 @@ webconfig_error_t translate_to_mesh_sta_subdoc(webconfig_t *config, webconfig_su
 webconfig_error_t encode_mesh_sta_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entered\n", __FUNCTION__, __LINE__);
+
     cJSON *obj, *obj_array, *hal_cap;
     unsigned int i, j;
     wifi_vap_info_map_t *map;

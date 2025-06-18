@@ -1020,6 +1020,7 @@ int push_global_config_dml_cache_to_one_wifidb()
     memset(&data, 0, sizeof(webconfig_subdoc_data_t));
     memcpy((unsigned char *)&data.u.decoded.config, (unsigned char *)&webconfig_dml.config, sizeof(wifi_global_config_t));
     memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&webconfig_dml.hal_cap, sizeof(wifi_hal_capability_t));
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&webconfig_dml.webconfig, &data, webconfig_subdoc_type_wifi_config) == webconfig_error_none) {
         str = data.u.encoded.raw;
@@ -1082,6 +1083,7 @@ int push_radio_dml_cache_to_one_wifidb()
     memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&webconfig_dml.hal_cap, sizeof(wifi_hal_capability_t));
 
     data.u.decoded.num_radios = get_num_radio_dml();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&webconfig_dml.webconfig, &data, webconfig_subdoc_type_radio) == webconfig_error_none) {
         str = data.u.encoded.raw;
@@ -1111,6 +1113,7 @@ int push_acl_list_dml_cache_to_one_wifidb(wifi_vap_info_t *vap_info)
 
 
     data.u.decoded.num_radios = get_num_radio_dml();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&webconfig_dml.webconfig, &data, webconfig_subdoc_type_mac_filter) == webconfig_error_none) {
         str = data.u.encoded.raw;
@@ -1210,7 +1213,7 @@ int push_subdoc_to_one_wifidb(uint8_t subdoc)
     memcpy((unsigned char *)&data.u.decoded.radios, (unsigned char *)&webconfig_dml.radios, get_num_radio_dml()*sizeof(rdk_wifi_radio_t));
     memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&webconfig_dml.hal_cap, sizeof(wifi_hal_capability_t));
     data.u.decoded.num_radios = get_num_radio_dml();
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
     if (webconfig_encode(&webconfig_dml.webconfig, &data, subdoc) == webconfig_error_none) {
         str = data.u.encoded.raw;
         wifi_util_info_print(WIFI_DMCLI, "%s:  VAP DML cache encoded successfully  \n", __FUNCTION__);
@@ -1353,6 +1356,7 @@ int push_blaster_config_dml_to_ctrl_queue()
     memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&webconfig_dml.hal_cap, sizeof(wifi_hal_capability_t));
     wifi_util_dbg_print(WIFI_DMCLI, "%s:%d: After getting the trace context in data_u_decoded_blaster traceparent:%s, tracestate:%s\n", __func__, __LINE__,data.u.decoded.blaster.t_header.traceParent, data.u.decoded.blaster.t_header.traceState);
     data.u.decoded.num_radios = get_num_radio_dml();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&webconfig_dml.webconfig, &data, webconfig_subdoc_type_blaster) == webconfig_error_none) {
         str = data.u.encoded.raw;
@@ -1394,6 +1398,7 @@ int push_harvester_dml_cache_to_one_wifidb()
         memset(&data, 0, sizeof(webconfig_subdoc_data_t));
         memcpy((unsigned char *)&data.u.decoded.harvester, (unsigned char *)&webconfig_dml.harvester, sizeof(instant_measurement_config_t));
         memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&webconfig_dml.hal_cap, sizeof(wifi_hal_capability_t));
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
         if (webconfig_encode(&webconfig_dml.webconfig, &data, webconfig_subdoc_type_harvester) == webconfig_error_none) {
             str = data.u.encoded.raw;

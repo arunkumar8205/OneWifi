@@ -145,6 +145,7 @@ static int push_levl_data_dml_to_ctrl_queue(levl_config_t **levl)
 
     memset(data, 0, sizeof(webconfig_subdoc_data_t));
     memcpy(&(data->u.decoded.levl), *levl, sizeof(levl_config_t));
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, data, webconfig_subdoc_type_levl) == webconfig_error_none) {
         str = data->u.encoded.raw;

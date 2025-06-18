@@ -680,6 +680,7 @@ static int push_blob_data(webconfig_subdoc_data_t *data, webconfig_subdoc_type_t
 {
     char *str;
     wifi_ctrl_t *ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, data, subdoc_type) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode for subdoc type %d\n", __FUNCTION__, __LINE__, subdoc_type);
@@ -717,6 +718,8 @@ static pErr private_home_exec_common_handler(void *blob, const char *vap_prefix,
         wifi_util_error_print(WIFI_CTRL, "%s: malloc failure\n", __func__);
         goto done;
     }
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
+
     webconfig_init_subdoc_data(data);
 
     if (update_vap_info_with_blob_info(blob, NULL, data, vap_prefix, false, execRetVal) != 0) {
@@ -761,6 +764,7 @@ static int connected_subdoc_handler(void *blob, void *amenities_blob, char *vap_
                               __func__, sizeof(webconfig_subdoc_data_t));
         goto done;
     }
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
 
     webconfig_init_subdoc_data(data);
 

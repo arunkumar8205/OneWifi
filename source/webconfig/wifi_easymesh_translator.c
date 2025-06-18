@@ -103,6 +103,7 @@ webconfig_error_t webconfig_easymesh_encode(webconfig_t *config,
     webconfig_easymesh_data.u.decoded.external_protos = (webconfig_external_easymesh_t *)data;
     webconfig_easymesh_data.descriptor = webconfig_data_descriptor_translate_from_easymesh;
     // debug_external_protos(&webconfig_ovsdb_data, __func__, __LINE__);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(config, &webconfig_easymesh_data, type) != webconfig_error_none) {
         *str = NULL;

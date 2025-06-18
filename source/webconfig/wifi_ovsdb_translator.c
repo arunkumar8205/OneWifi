@@ -1117,6 +1117,7 @@ webconfig_error_t webconfig_ovsdb_encode(webconfig_t *config,
         (MAX_NUM_RADIOS * sizeof(rdk_wifi_radio_t)));
     clone_maclist_map(webconfig_ovsdb_data.u.decoded.num_radios,
         webconfig_ovsdb_data.u.decoded.radios, rdk_wifi_radio_state);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     // Here webconfig_ovsdb_data's decoded_params will be updated.
     if (webconfig_encode(config, &webconfig_ovsdb_data, type) != webconfig_error_none) {

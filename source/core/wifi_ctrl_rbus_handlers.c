@@ -161,7 +161,9 @@ int stats_bus_publish(wifi_ctrl_t *ctrl, void *stats_data)
 
         wifi_util_dbg_print(WIFI_CTRL, "%s:%d subdoc_type is %d and eventName is %s at %ld\n",
             __func__, __LINE__, subdoc_type, eventName, response->response_time);
-        if (webconfig_encode(&ctrl->webconfig, data, subdoc_type) != webconfig_error_none) {
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
+	if (webconfig_encode(&ctrl->webconfig, data, subdoc_type) != webconfig_error_none) {
             wifi_util_error_print(WIFI_CTRL, "%s:%d Error in encoding radio stats\n", __func__,
                 __LINE__);
             free(data->u.decoded.collect_stats.stats);
@@ -608,7 +610,9 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
             sizeof(wifi_hal_capability_t));
         data.u.decoded.num_radios = num_of_radios;
         // tell webconfig to encode
-        webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
+	webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
 	wifi_util_dbg_print(WIFI_CTRL,"[Onewifi crash] After WebConfigEncode: %s:%d | RAW=%p\n",__FUNCTION__, __LINE__, data.u.encoded.raw);
 	if (data.u.encoded.raw == NULL) {
 	    	wifi_util_error_print(WIFI_CTRL, "%s:%d: encoded.raw is NULL\n", __func__, __LINE__);
@@ -642,7 +646,9 @@ bus_error_t webconfig_init_data_get_subdoc(char *event_name, raw_data_t *p_data,
             sizeof(wifi_hal_capability_t));
         data.u.decoded.num_radios = num_of_radios;
         // tell webconfig to encode
-        webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
+	webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
 
         uint32_t str_size = (strlen(data.u.encoded.raw) + 1);
         p_data->data_type = bus_data_type_string;
@@ -736,6 +742,8 @@ bus_error_t webconfig_get_dml_subdoc(char *event_name, raw_data_t *p_data, bus_u
         sizeof(wifi_hal_capability_t));
     data.u.decoded.num_radios = getNumberRadios();
     // tell webconfig to encode
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml) !=
         webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d webconfig encode failed\n", __func__, __LINE__);
@@ -930,6 +938,8 @@ bus_error_t get_assoc_clients_data(char *event_name, raw_data_t *p_data, bus_use
 
     data.u.decoded.num_radios = getNumberRadios();
     data.u.decoded.assoclist_notifier_type = assoclist_notifier_full;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_associated_clients);
 
     uint32_t str_size = strlen(data.u.encoded.raw) + 1;
@@ -974,6 +984,8 @@ bus_error_t get_null_subdoc_data(char *name, raw_data_t *p_data, bus_user_data_t
         sizeof(wifi_hal_capability_t));
 
     data.u.decoded.num_radios = getNumberRadios();
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_null);
 
     uint32_t str_size = strlen(data.u.encoded.raw) + 1;
@@ -1179,6 +1191,7 @@ char *get_assoc_devices_blob()
 
     pdata->u.decoded.num_radios = getNumberRadios();
     pdata->u.decoded.assoclist_notifier_type = assoclist_notifier_full;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     webconfig_encode(&ctrl->webconfig, pdata, webconfig_subdoc_type_associated_clients);
 
@@ -1223,6 +1236,7 @@ bus_error_t get_acl_device_data(char *name, raw_data_t *p_data, bus_user_data_t 
         sizeof(wifi_hal_capability_t));
 
     data.u.decoded.num_radios = getNumberRadios();
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_mac_filter) ==
         webconfig_error_none) {
@@ -3088,6 +3102,7 @@ bus_error_t set_force_vap_apply(char *name, raw_data_t *p_data, bus_user_data_t 
             force_apply;
 
         get_subdoc_name_from_vap_index(idx - 1, &subdoc_type);
+    	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
         if (webconfig_encode(&ctrl->webconfig, data, subdoc_type) != webconfig_error_none) {
             wifi_util_error_print(WIFI_CTRL, "%s:%d Error in encoding radio stats\n", __func__,

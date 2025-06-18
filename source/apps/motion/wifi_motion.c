@@ -575,6 +575,7 @@ static int push_csi_data_dml_to_ctrl_queue(queue_t *csi_queue)
     memset(data, 0, sizeof(webconfig_subdoc_data_t));
     wifi_util_dbg_print(WIFI_APPS, "%s: queue count is %lu\n", __func__, queue_count(csi_queue));
     data->u.decoded.csi_data_queue = csi_queue;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, data, webconfig_subdoc_type_csi) == webconfig_error_none) {
         str = data->u.encoded.raw;

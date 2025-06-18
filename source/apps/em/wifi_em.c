@@ -365,7 +365,7 @@ static int em_sta_stats_publish(wifi_app_t *app, client_assoc_data_t *stats, int
             }
         }
     }
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
     if (webconfig_encode(&ctrl->webconfig, data, webconfig_subdoc_type_em_ap_metrics_report) !=
         webconfig_error_none) {
         wifi_util_error_print(WIFI_EM, "%s:%d Error in encoding assocdev stats\n", __func__,
@@ -777,6 +777,7 @@ static int em_publish_stats_data(channel_scan_response_t *scan_response)
 
     wifi_util_dbg_print(WIFI_EM, "%s:%d subdoc_type is %d and eventName is %s at %ld\n", __func__,
         __LINE__, subdoc_type, eventName, response_time);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, data, subdoc_type) != webconfig_error_none) {
         wifi_util_error_print(WIFI_EM, "%s:%d Error in encoding channel scan stats\n", __func__,
@@ -1510,6 +1511,7 @@ static int ap_report_push_cb(em_ap_report_callback_arg_t *args)
     data->u.decoded.hal_cap = wifi_mgr->hal_cap;
     data->u.decoded.radios[radio_index] = wifi_mgr->radio_config[radio_index];
     data->type = webconfig_subdoc_type_em_ap_metrics_report;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, data, webconfig_subdoc_type_em_ap_metrics_report) ==
         webconfig_error_none) {
@@ -2174,6 +2176,7 @@ static int em_beacon_report_publish(bus_handle_t *handle, void *msg_data)
     for (i = 0; i < getNumberRadios(); i++){
         wb_data->u.decoded.radios[i] = mgr->radio_config[i];
     }
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, wb_data, webconfig_subdoc_type_beacon_report) !=
         webconfig_error_none) {

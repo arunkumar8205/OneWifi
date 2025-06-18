@@ -197,6 +197,7 @@ int webconfig_send_wifi_config_status(wifi_ctrl_t *ctrl)
     memset(&data,0,sizeof(webconfig_subdoc_data_t));
     memcpy((unsigned char *)&data.u.decoded.config, (unsigned char *)&mgr->global_config, sizeof(wifi_global_config_t));
     memcpy((unsigned char *)&data.u.decoded.hal_cap, (unsigned char *)&mgr->hal_cap, sizeof(wifi_hal_capability_t));
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_wifi_config) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
@@ -210,8 +211,9 @@ int webconfig_send_wifi_config_status(wifi_ctrl_t *ctrl)
 int webconfig_send_radio_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_t type)
 {
     webconfig_subdoc_data_t data;
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
     webconfig_init_subdoc_data(&data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, type) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
@@ -225,8 +227,9 @@ int webconfig_send_radio_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_
 int webconfig_send_vap_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_t type)
 {
     webconfig_subdoc_data_t data;
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
     webconfig_init_subdoc_data(&data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, type) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
@@ -240,8 +243,11 @@ int webconfig_send_vap_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_t 
 int webconfig_send_dml_subdoc_status(wifi_ctrl_t *ctrl)
 {
     webconfig_subdoc_data_t data;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
 
     webconfig_init_subdoc_data(&data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
     } else {
@@ -305,8 +311,12 @@ int  webconfig_free_vap_object_diff_assoc_client_entries(webconfig_subdoc_data_t
 int webconfig_send_associate_status(wifi_ctrl_t *ctrl)
 {
     webconfig_subdoc_data_t data;
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
+
     webconfig_init_subdoc_data(&data);
     data.u.decoded.assoclist_notifier_type = assoclist_notifier_diff;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_associated_clients) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
     }
@@ -319,8 +329,12 @@ int webconfig_send_associate_status(wifi_ctrl_t *ctrl)
 int webconfig_send_full_associate_status(wifi_ctrl_t *ctrl)
 {
     webconfig_subdoc_data_t data;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
+
     webconfig_init_subdoc_data(&data);
     data.u.decoded.assoclist_notifier_type = assoclist_notifier_full;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_associated_clients) !=
         webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__,
@@ -344,6 +358,7 @@ int webconfig_send_blaster_status(wifi_ctrl_t *ctrl)
 
     memset(&data,0,sizeof(webconfig_subdoc_data_t));
     memcpy((unsigned char *)&data.u.decoded.blaster, (unsigned char *)&mgr->blaster_config_global, sizeof(active_msmt_t));
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_blaster) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
@@ -357,7 +372,10 @@ int webconfig_send_blaster_status(wifi_ctrl_t *ctrl)
 int webconfig_send_steering_clients_status(wifi_ctrl_t *ctrl)
 {
     webconfig_subdoc_data_t data;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
+
     webconfig_init_subdoc_data(&data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_steering_clients) != webconfig_error_none) {
         wifi_util_dbg_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
@@ -371,8 +389,10 @@ int webconfig_send_steering_clients_status(wifi_ctrl_t *ctrl)
 int webconfig_send_multivap_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_t type)
 {
     webconfig_subdoc_data_t data;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_init_subdoc_data \n", __FUNCTION__, __LINE__);
 
     webconfig_init_subdoc_data(&data);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, type) != webconfig_error_none) {
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__,
@@ -410,6 +430,7 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
             if (check_wifi_radio_sched_timeout_active_status(ctrl) == false &&
                 check_wifi_csa_sched_timeout_active_status(ctrl) == false) {
                 type = webconfig_subdoc_type_radio;
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_radio_subdoc_status \n", __FUNCTION__, __LINE__);
                 webconfig_send_radio_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -418,6 +439,7 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_private_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapPrivate) == false) {
                 type = webconfig_subdoc_type_private;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -426,6 +448,7 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_home_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapXhs) == false) {
                 type = webconfig_subdoc_type_home;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -434,6 +457,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_xfinity_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapHotspot) == false) {
                 type = webconfig_subdoc_type_xfinity;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -442,6 +467,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_lnf_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapLnf) == false) {
                 type = webconfig_subdoc_type_lnf;
+		                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -450,6 +477,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_mesh_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapMesh) == false) {
                 type = webconfig_subdoc_type_mesh;
+		                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -457,11 +486,15 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         break;
         case ctrl_webconfig_state_sta_conn_status_rsp_pending:
             type = webconfig_subdoc_type_dml;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_vap_subdoc_status(ctrl, type);
         break;
         case ctrl_webconfig_state_vap_mesh_sta_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapSTAMesh) == false) {
                 type = webconfig_subdoc_type_dml;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -470,6 +503,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_mesh_backhaul_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapMeshBackhaul) == false) {
                 type = webconfig_subdoc_type_mesh_backhaul;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -478,6 +513,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_mesh_backhaul_sta_cfg_rsp_pending:
             if (check_wifi_vap_sched_timeout_active_status(ctrl, isVapSTAMesh) == false) {
                 type = webconfig_subdoc_type_mesh_backhaul_sta;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_vap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -485,27 +522,38 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         break;
         case ctrl_webconfig_state_macfilter_cfg_rsp_pending:
             type = webconfig_subdoc_type_mac_filter;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_vap_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_vap_subdoc_status(ctrl, webconfig_subdoc_type_mac_filter);
         break;
         case ctrl_webconfig_state_vap_all_cfg_rsp_pending:
             type = webconfig_subdoc_type_dml;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_dml_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_dml_subdoc_status(ctrl);
             break;
         case ctrl_webconfig_state_factoryreset_cfg_rsp_pending:
             type = webconfig_subdoc_type_dml;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_dml_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_dml_subdoc_status(ctrl);
         break;
         case ctrl_webconfig_state_wifi_config_cfg_rsp_pending:
             type = webconfig_subdoc_type_wifi_config;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_wifi_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_wifi_config_status(ctrl);
             break;
         case ctrl_webconfig_state_associated_clients_cfg_rsp_pending:
             type = webconfig_subdoc_type_associated_clients;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_associate_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_associate_status(ctrl);
             break;
 
         case ctrl_webconfig_state_associated_clients_full_cfg_rsp_pending:
             type = webconfig_subdoc_type_associated_clients;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_full_associate_status \n", __FUNCTION__, __LINE__);
             webconfig_send_full_associate_status(ctrl);
             break;
 
@@ -513,19 +561,27 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
                 /* Once the blaster triggered successfully, update the status as completed and pass it to OVSM */
                 type = webconfig_subdoc_type_blaster;
                 mgr->blaster_config_global.Status = blaster_state_completed;
+    		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_blster_status \n", __FUNCTION__, __LINE__);
+		
                 webconfig_send_blaster_status(ctrl);
             break;
         case ctrl_webconfig_state_steering_clients_rsp_pending:
             type = webconfig_subdoc_type_steering_clients;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_sterring clinets_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_steering_clients_status(ctrl);
             break;
         case ctrl_webconfig_state_trigger_dml_thread_data_update_pending:
             type = webconfig_subdoc_type_dml;
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_dml_subdoc_status \n", __FUNCTION__, __LINE__);
+
             webconfig_send_dml_subdoc_status(ctrl);
             break;
         case ctrl_webconfig_state_vap_24G_cfg_rsp_pending:
             if (check_wifi_multivap_sched_timeout_active_status(ctrl, 0) == false) {
                 type = webconfig_subdoc_type_vap_24G;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_multivp_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_multivap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -534,6 +590,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_5G_cfg_rsp_pending:
             if (check_wifi_multivap_sched_timeout_active_status(ctrl, 1) == false) {
                 type = webconfig_subdoc_type_vap_5G;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_multivp_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_multivap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -542,6 +600,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
         case ctrl_webconfig_state_vap_6G_cfg_rsp_pending:
             if (check_wifi_multivap_sched_timeout_active_status(ctrl, 2) == false) {
                 type = webconfig_subdoc_type_vap_6G;
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_multivaap_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_multivap_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;
@@ -565,6 +625,8 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
                     false &&
                 check_wifi_csa_sched_timeout_active_status_of_radio_index(ctrl, radio_index) ==
                     false) {
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_send_raadio_subdoc_status \n", __FUNCTION__, __LINE__);
+
                 webconfig_send_radio_subdoc_status(ctrl, type);
             } else {
                 return RETURN_OK;

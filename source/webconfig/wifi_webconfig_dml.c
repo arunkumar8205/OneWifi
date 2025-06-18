@@ -92,6 +92,8 @@ webconfig_error_t translate_to_dml_subdoc(webconfig_t *config, webconfig_subdoc_
 webconfig_error_t encode_dml_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters \n", __FUNCTION__, __LINE__);
+
     cJSON *obj, *obj_array, *hal_cap;
     unsigned int i, j, array_size = 0;
     wifi_vap_info_map_t *map;

@@ -694,7 +694,9 @@ void test_radio_subdoc_change(webconfig_consumer_t *consumer)
         data.descriptor =  0;
 
         printf("%s:%d: start webconfig_encode\n", __func__, __LINE__);
-        ret = webconfig_encode(&consumer->webconfig, &data,
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
+	ret = webconfig_encode(&consumer->webconfig, &data,
                 webconfig_subdoc_type_radio);
         if (ret == webconfig_error_none)
             str = data.u.encoded.raw;
@@ -732,6 +734,8 @@ void test_null_subdoc_change(webconfig_consumer_t *consumer)
     //The below information is not required for the null subdoc, Filled the structures for testing purpose.
     if (enable_ovsdb == true) {
     } else {
+	        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
         ret = webconfig_encode(&consumer->webconfig, &data,
                 webconfig_subdoc_type_null);
         if (ret == webconfig_error_none) {
@@ -798,6 +802,7 @@ void test_mesh_sta_subdoc_change(webconfig_consumer_t *consumer)
         }
         printf("%s:%d: start webconfig_encode\n", __func__, __LINE__);
         data.u.decoded.num_radios = consumer->hal_cap.wifi_prop.numRadios;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
         ret = webconfig_encode(&consumer->webconfig, &data,
                 webconfig_subdoc_type_mesh_sta);
@@ -897,6 +902,7 @@ void test_mesh_subdoc_change(webconfig_consumer_t *consumer)
         }
         printf("%s:%d: start webconfig_encode\n", __func__, __LINE__);
         data.u.decoded.num_radios = consumer->hal_cap.wifi_prop.numRadios;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
         ret = webconfig_encode(&consumer->webconfig, &data,
                 webconfig_subdoc_type_mesh);
@@ -1190,7 +1196,9 @@ void test_private_subdoc_change(webconfig_consumer_t *consumer)
             data.u.encoded.raw = NULL;
         }
         printf("%s:%d: start webconfig_encode num_of_radio:%d\n", __func__, __LINE__, data.u.decoded.num_radios);
-        ret = webconfig_encode(&consumer->webconfig, &data,
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+
+	ret = webconfig_encode(&consumer->webconfig, &data,
                 webconfig_subdoc_type_private);
         if (ret == webconfig_error_none)
             str = data.u.encoded.raw;
