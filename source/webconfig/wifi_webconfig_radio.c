@@ -52,6 +52,8 @@ webconfig_error_t access_check_radio_subdoc(webconfig_t *config, webconfig_subdo
 
 webconfig_error_t translate_from_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+
     if (((data->descriptor & webconfig_data_descriptor_translate_to_ovsdb) == webconfig_data_descriptor_translate_to_ovsdb)
         || ((data->descriptor & webconfig_data_descriptor_translate_to_easymesh) == webconfig_data_descriptor_translate_to_easymesh)) {
         if (config->proto_desc.translate_to(webconfig_subdoc_type_radio, data) != webconfig_error_none) {
@@ -74,23 +76,33 @@ webconfig_error_t translate_to_radio_subdoc(webconfig_t *config, webconfig_subdo
 	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb)
         ||  ((data->descriptor & webconfig_data_descriptor_translate_from_easymesh) == webconfig_data_descriptor_translate_from_easymesh)) {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Translating from OVSDB or Easymesh\n", __FUNCTION__, __LINE__);
         if (config->proto_desc.translate_from(webconfig_subdoc_type_radio, data) != webconfig_error_none) {
-            if ((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb) {
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Subdocument translation failed\n", __FUNCTION__, __LINE__);
+            if ((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) == webconfig_data_descriptor_translate_from_ovsdb){
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Failed during OVSDB translation\n", __FUNCTION__, __LINE__);
                 return webconfig_error_translate_from_ovsdb;
             } else {
+		    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Failed during Easymesh translation\n", __FUNCTION__, __LINE__);
                 return webconfig_error_translate_from_easymesh;
             }
         }
     } else if ((data->descriptor & webconfig_data_descriptor_translate_from_tr181) == webconfig_data_descriptor_translate_from_tr181) {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Translation from TR-181 not yet implemented\n", __FUNCTION__, __LINE__);
     } else {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - No translation required\n", __FUNCTION__, __LINE__);
+
         // no translation required
     }
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Exits successfully\n", __FUNCTION__, __LINE__);
+
     return webconfig_error_none;
 }
 
 webconfig_error_t encode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj, *obj_array;
     unsigned int i;
     rdk_wifi_radio_t *radio;
@@ -98,6 +110,8 @@ webconfig_error_t encode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data
     char *str;
 
     params = &data->u.decoded;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Creating JSON object\n", __FUNCTION__, __LINE__);
+
     json = cJSON_CreateObject();
     data->u.encoded.json = json;
 
@@ -112,27 +126,37 @@ webconfig_error_t encode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data
         radio = &params->radios[i];
         obj = cJSON_CreateObject();
         cJSON_AddItemToArray(obj_array, obj);
+        wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Encoding radio[%u]\n", __FUNCTION__, __LINE__, i);
 
         if (encode_radio_object(radio, obj) != webconfig_error_none) {
             wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d: Failed to encode radio object\n", __func__, __LINE__);
-            cJSON_Delete(json);
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Encoding failed for radio[%u]\n", __FUNCTION__, __LINE__, i);
+	    cJSON_Delete(json);
             return webconfig_error_encode;
         }
     }
 
     str = cJSON_Print(json);
-
+    if (str== NULL)
+    {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - cJSON_Print returned NULL\n", __FUNCTION__, __LINE__);
+    }
     data->u.encoded.raw = (webconfig_subdoc_encoded_raw_t)calloc(strlen(str) + 1, sizeof(char));
     if (data->u.encoded.raw == NULL) {
         wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d Failed to allocate memory.\n", __func__,__LINE__);
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Memory allocation failed for encoded.raw\n", __FUNCTION__, __LINE__);
+
         cJSON_free(str);
         cJSON_Delete(json);
+
         return webconfig_error_encode;
     }
 
     memcpy(data->u.encoded.raw, str, strlen(str));
     cJSON_free(str);
     cJSON_Delete(json);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Successfully encoded radio subdoc\n", __FUNCTION__, __LINE__);
+
     wifi_util_info_print(WIFI_WEBCONFIG, "%s:%d: encode success\n", __func__, __LINE__);
     return webconfig_error_none;
 }
@@ -140,6 +164,8 @@ webconfig_error_t encode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data
 webconfig_error_t decode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     webconfig_subdoc_t  *doc;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+
     cJSON *obj_radios;
     cJSON *obj, *obj_radio;
     unsigned int i, j, size;
@@ -232,6 +258,7 @@ webconfig_error_t decode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data
 
 webconfig_error_t init_single_radio_subdoc(webconfig_subdoc_t *doc)
 {
+	wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     doc->num_objects = sizeof(radio_objects) / sizeof(webconfig_subdoc_object_t);
     memcpy((unsigned char *)doc->objects, (unsigned char *)&radio_objects, sizeof(radio_objects));
     return webconfig_error_none;
@@ -244,6 +271,7 @@ webconfig_error_t access_check_single_radio_subdoc(webconfig_t *config, webconfi
 
 webconfig_error_t translate_from_single_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     if (((data->descriptor & webconfig_data_descriptor_translate_to_ovsdb) ==
             webconfig_data_descriptor_translate_to_ovsdb) ||
         ((data->descriptor & webconfig_data_descriptor_translate_to_easymesh) ==
@@ -268,6 +296,8 @@ webconfig_error_t translate_from_single_radio_subdoc(webconfig_t *config, webcon
 
 webconfig_error_t translate_to_single_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
+	        wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+
     if (((data->descriptor & webconfig_data_descriptor_translate_from_ovsdb) ==
             webconfig_data_descriptor_translate_from_ovsdb) ||
         ((data->descriptor & webconfig_data_descriptor_translate_from_easymesh) ==
@@ -292,6 +322,8 @@ webconfig_error_t translate_to_single_radio_subdoc(webconfig_t *config, webconfi
 webconfig_error_t encode_single_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     cJSON *json;
+            wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+
     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj, *obj_array;
     rdk_wifi_radio_t *radio;
@@ -369,6 +401,8 @@ webconfig_error_t encode_single_radio_subdoc(webconfig_t *config, webconfig_subd
 webconfig_error_t decode_single_radio_subdoc(webconfig_t *config, webconfig_subdoc_data_t *data)
 {
     webconfig_subdoc_t *doc;
+    wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
+
     wifi_util_dbg_print(WIFI_CTRL, "%s:%d: [Onewifi crash] Enters\n",__FUNCTION__, __LINE__);
     cJSON *obj_radios;
     cJSON *obj, *obj_radio;
