@@ -3415,6 +3415,8 @@ BOOL is_bssid_valid(const bssid_t bssid)
 bool is_bandwidth_and_hw_variant_compatible(uint32_t variant, wifi_channelBandwidth_t current_bw)
 {
     wifi_channelBandwidth_t supported_bw = 0;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters\n", __FUNCTION__, __LINE__);
+
 
     if ( variant & WIFI_80211_VARIANT_A ) {
         if (supported_bw < WIFI_CHANNELBANDWIDTH_20MHZ) {
@@ -3464,6 +3466,8 @@ bool is_bandwidth_and_hw_variant_compatible(uint32_t variant, wifi_channelBandwi
     }
 #endif /* CONFIG_IEEE80211BE */
     if (supported_bw < current_bw) {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - supported bandwidth retruned false\n", __FUNCTION__, __LINE__);
+
         wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d variant:%d supported bandwidth:%d current_bw:%d \r\n", __func__, __LINE__, variant, supported_bw, current_bw);
         return false;
     } else {
@@ -3474,14 +3478,16 @@ bool is_bandwidth_and_hw_variant_compatible(uint32_t variant, wifi_channelBandwi
 int validate_radio_parameters(const wifi_radio_operationParam_t *radio_info)
 {
     bool l_bool_status;
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d -Entered validate_radio_parameters \n", __FUNCTION__, __LINE__);
     if (validate_wifi_hw_variant(radio_info->band, radio_info->variant) != RETURN_OK) {
+	    wifi_util_dbg_print(WIFI_WEBCONFIG, "[Onewifi crash] %s():%d - wifi hw mode[%d] validation failure (Band: %d)\n",__func__, __LINE__, radio_info->variant, radio_info->band);
         wifi_util_dbg_print(WIFI_WEBCONFIG,"%s:%d: wifi hw mode[%d] validation failure\n",__func__, __LINE__, radio_info->variant);
         return RETURN_ERR;
     }
 
     l_bool_status = is_bandwidth_and_hw_variant_compatible(radio_info->variant, radio_info->channelWidth);
     if (l_bool_status == false) {
+	    wifi_util_dbg_print(WIFI_WEBCONFIG, "[Onewifi crash] %s():%d - Bandwidth [%d] not compatible with Variant [%d]\n", __FUNCTION__, __LINE__, radio_info->channelWidth, radio_info->variant);
         return RETURN_ERR;
     }
 

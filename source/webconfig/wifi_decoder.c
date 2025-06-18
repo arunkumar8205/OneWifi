@@ -2521,6 +2521,8 @@ webconfig_error_t decode_wifi_channel(wifi_freq_bands_t wifi_band, UINT *wifi_ra
 
 int validate_wifi_hw_variant(wifi_freq_bands_t radio_band, wifi_ieee80211Variant_t wifi_hw_mode)
 {
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters\n", __FUNCTION__, __LINE__);
+
     if (wifi_hw_mode == 0) {
         wifi_util_error_print(WIFI_WEBCONFIG, "%s() %d Error wifi_hw_mode %d\n", __FUNCTION__, __LINE__, wifi_hw_mode);
         return RETURN_ERR;
@@ -2541,6 +2543,8 @@ int validate_wifi_hw_variant(wifi_freq_bands_t radio_band, wifi_ieee80211Variant
         MASK_BITSET(wifi_hw_mode, WIFI_80211_VARIANT_BE);
 #endif /* CONFIG_IEEE80211BE */
         if(wifi_hw_mode != 0) {
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Error with wifi_hw_mode\n", __FUNCTION__, __LINE__);
+
             wifi_util_error_print(WIFI_WEBCONFIG, "%s() %d Error wifi_hw_mode %d\n", __FUNCTION__, __LINE__, wifi_hw_mode);
             return RETURN_ERR;
         }
@@ -2557,6 +2561,8 @@ int validate_wifi_hw_variant(wifi_freq_bands_t radio_band, wifi_ieee80211Variant
         MASK_BITSET(wifi_hw_mode, WIFI_80211_VARIANT_BE);
 #endif /* CONFIG_IEEE80211BE */
         if (wifi_hw_mode != 0) {
+		wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Error with wifi hw_mode\n", __FUNCTION__, __LINE__);
+
             wifi_util_error_print(WIFI_WEBCONFIG, "%s() %d Error wifi_hw_mode %d\n", __FUNCTION__, __LINE__, wifi_hw_mode);
             return RETURN_ERR;
         }
@@ -2567,6 +2573,7 @@ int validate_wifi_hw_variant(wifi_freq_bands_t radio_band, wifi_ieee80211Variant
         MASK_BITSET(wifi_hw_mode, WIFI_80211_VARIANT_BE);
 #endif /* CONFIG_IEEE80211BE */
         if (wifi_hw_mode != 0) {
+		                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Error with wifi hw_mode\n", __FUNCTION__, __LINE__);
             wifi_util_error_print(WIFI_WEBCONFIG, "%s() %d Error wifi_hw_mode %d\n", __FUNCTION__, __LINE__, wifi_hw_mode);
             return RETURN_ERR;
         }
@@ -2575,6 +2582,8 @@ int validate_wifi_hw_variant(wifi_freq_bands_t radio_band, wifi_ieee80211Variant
         MASK_BITSET(wifi_hw_mode, WIFI_80211_VARIANT_AD);
 
         if (wifi_hw_mode != 0) {
+		                wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Error with wifi hw_mode\n", __FUNCTION__, __LINE__);
+
             wifi_util_error_print(WIFI_WEBCONFIG, "%s() %d Error wifi_hw_mode %d\n", __FUNCTION__, __LINE__, wifi_hw_mode);
             return RETURN_ERR;
         }

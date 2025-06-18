@@ -41,7 +41,7 @@ webconfig_error_t encode_radio_setup_object(const rdk_wifi_vap_map_t *vap_map, c
 {
     cJSON *obj_array, *obj;
     unsigned int i;
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - encode_radio_setup_object()\n", __FUNCTION__, __LINE__);
     // RadioIndex
     cJSON_AddNumberToObject(radio_object, "RadioIndex", vap_map->radio_index);
 
@@ -65,6 +65,8 @@ webconfig_error_t encode_radio_operating_classes(const wifi_radio_operationParam
 {
     cJSON *obj_array, *obj;
     unsigned int i, j;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - enters\n", __FUNCTION__, __LINE__);
+
     const wifi_operating_classes_t *oper_classes;
     int nonOperableChannel[MAXNUMNONOPERABLECHANNELS];
 
@@ -95,6 +97,8 @@ webconfig_error_t encode_radio_curr_operating_classes(const wifi_radio_operation
     cJSON *radio_object)
 {
     cJSON *obj_array, *obj;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters\n", __FUNCTION__, __LINE__);
+
 
     obj_array = cJSON_CreateArray();
     cJSON_AddItemToObject(radio_object, "CurrentOperatingClasses", obj_array);
