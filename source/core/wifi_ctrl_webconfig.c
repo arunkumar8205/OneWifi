@@ -216,6 +216,8 @@ int webconfig_send_radio_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_type_
     wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
 
     if (webconfig_encode(&ctrl->webconfig, &data, type) != webconfig_error_none) {
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - failed webconfig_encode \n", __FUNCTION__, __LINE__);
+
         wifi_util_error_print(WIFI_CTRL, "%s:%d - Failed webconfig_encode\n", __FUNCTION__, __LINE__);
     } else {
         webconfig_data_free(&data);

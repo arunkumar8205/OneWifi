@@ -3484,10 +3484,11 @@ int validate_radio_parameters(const wifi_radio_operationParam_t *radio_info)
         wifi_util_dbg_print(WIFI_WEBCONFIG,"%s:%d: wifi hw mode[%d] validation failure\n",__func__, __LINE__, radio_info->variant);
         return RETURN_ERR;
     }
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - current Baaandwidth is[%d]  \n", __FUNCTION__, __LINE__,radio_info->channelWidth);
     l_bool_status = is_bandwidth_and_hw_variant_compatible(radio_info->variant, radio_info->channelWidth);
     if (l_bool_status == false) {
-	    wifi_util_dbg_print(WIFI_WEBCONFIG, "[Onewifi crash] %s():%d - Bandwidth [%d] not compatible with Variant [%d]\n", __FUNCTION__, __LINE__, radio_info->channelWidth, radio_info->variant);
+
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Bandwidth [%d] not compatible with Variant [%d]\n", __FUNCTION__, __LINE__, radio_info->channelWidth, radio_info->variant);
         return RETURN_ERR;
     }
 
