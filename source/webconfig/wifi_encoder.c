@@ -110,6 +110,8 @@ webconfig_error_t encode_radio_curr_operating_classes(const wifi_radio_operation
 webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radio_object)
 {
     const wifi_radio_operationParam_t *radio_info;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Entered encode_radio_object()\n", __FUNCTION__, __LINE__);
+
     const wifi_radio_feature_param_t *radio_feat;
     char channel_list[BUFFER_LENGTH_WIFIDB] = {0}, str[BUFFER_LENGTH_WIFIDB] = {0};
     char chan_buf[512] = {0};
@@ -122,6 +124,7 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
     obj = cJSON_CreateObject();
     cJSON_AddItemToObject(radio_object, "WifiRadioSetup", obj);
     if (encode_radio_setup_object(&radio->vaps, obj) != webconfig_error_none) {
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d Radio setup encode failed\n", __FUNCTION__, __LINE__);
         wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d Radio setup encode failed\n", __func__, __LINE__);
         return webconfig_error_encode;
     }
@@ -129,12 +132,13 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
 
     // RadioName
     cJSON_AddStringToObject(radio_object, "RadioName", radio->name);
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - RadioName: %s\n", __FUNCTION__, __LINE__, radio->name);
     radio_info = &radio->oper;
     radio_feat = &radio->feature;
 
     if (validate_radio_parameters(radio_info) != RETURN_OK) {
-        wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d Radio parameters validatation failed\n", __func__, __LINE__);
+	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%dSet failed invalid Country code\n", __FUNCTION__, __LINE__);
+	    wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d Set failed invalid Country code\n", __func__, __LINE__);
         return webconfig_error_encode;
     }
 
@@ -189,6 +193,8 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
         snprintf(str,sizeof(str),"%s",wifiCountryMapMembers[k].countryStr);
     } else {
         wifi_util_error_print(WIFI_WEBCONFIG,"%s Set failed invalid Country code %d.\n",__FUNCTION__,k);
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%dSet failed invalid Country code\n", __FUNCTION__, __LINE__);
+
         return webconfig_error_encode;
     }
 
@@ -328,6 +334,8 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
     if (encode_radio_operating_classes(radio_info, radio_object) != webconfig_error_none) {
         wifi_util_error_print(WIFI_WEBCONFIG, "%s:%d Radio operation classes failed\n", __func__,
             __LINE__);
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%dRadio operation classes failed\n", __FUNCTION__, __LINE__);
+
         return webconfig_error_encode;
     }
 
@@ -335,6 +343,8 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
     if (encode_radio_curr_operating_classes(radio_info, radio_object) != webconfig_error_none) {
         wifi_util_error_print(WIFI_WEBCONFIG,
             "%s:%d Radio current operation class encoding failed\n", __func__, __LINE__);
+	wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%dRadio current operation class encoding failed \n", __FUNCTION__, __LINE__);
+
         return webconfig_error_encode;
     }
     return webconfig_error_none;

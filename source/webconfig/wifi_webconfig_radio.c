@@ -121,6 +121,7 @@ webconfig_error_t encode_radio_subdoc(webconfig_t *config, webconfig_subdoc_data
     // encode radio object
     obj_array = cJSON_CreateArray();
     cJSON_AddItemToObject(json, "WifiRadioConfig", obj_array);
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - num_radios = %u\n", __FUNCTION__, __LINE__, params->num_radios);
 
     for (i = 0; i < params->num_radios; i++) {
         radio = &params->radios[i];
