@@ -406,6 +406,8 @@ int webconfig_send_multivap_subdoc_status(wifi_ctrl_t *ctrl, webconfig_subdoc_ty
 int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
 {
     static int pending_state = ctrl_webconfig_state_max;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - Enters \n", __FUNCTION__, __LINE__);
+
     webconfig_subdoc_type_t type = webconfig_subdoc_type_unknown;
     int radio_index = -1;
     int state;
@@ -421,7 +423,7 @@ int webconfig_analyze_pending_states(wifi_ctrl_t *ctrl)
             pending_state = 0x0001;
         }
     } while ((ctrl->webconfig_state & pending_state) == 0);
-
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s:%d - pending subdoc status:0x%x pending_state:0x%x\r\n", __func__,__LINE__, ctrl->webconfig_state, pending_state);
     wifi_util_dbg_print(WIFI_CTRL, "%s:%d - pending subdoc status:0x%x pending_state:0x%x\r\n", __func__,
                                                         __LINE__, ctrl->webconfig_state, pending_state);
     // this may move to scheduler task

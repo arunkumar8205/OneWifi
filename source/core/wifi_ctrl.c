@@ -2230,8 +2230,13 @@ static int run_cac_event(void* arg)
 static int pending_states_webconfig_analyzer(void *arg)
 {
     wifi_ctrl_t *ctrl = NULL;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d -Enters \n", __FUNCTION__, __LINE__);
 
     ctrl = (wifi_ctrl_t *)get_wifictrl_obj();
+    if (!ctrl) {
+        wifi_util_dbg_print(WIFI_WEBCONFIG, "[Onewifi crash] %s():%d - get_wifictrl_obj() returned NULL\n", __FUNCTION__, __LINE__);
+        //return TIMER_TASK_COMPLETE;
+    }
 
     webconfig_analyze_pending_states(ctrl);
     return TIMER_TASK_COMPLETE;
