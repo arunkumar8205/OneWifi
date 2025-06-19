@@ -2332,7 +2332,7 @@ bool should_process_hotspot_config_change(const wifi_vap_info_t *lnf_vap_info,
                   is_secure_hotspot &&
                   (vap_enabled_changed || radius_config_changed));
     
-    wifi_util_info_print(WIFI_CTRL, "%s: Hotspot vap_name is %s & LnF vap_name is %s and bool is %d:%d:%d:%d:%d - result=%s\n", 
+    /*wifi_util_info_print(WIFI_CTRL, "%s: Hotspot vap_name is %s & LnF vap_name is %s and bool is %d:%d:%d:%d:%d - result=%s\n", 
                         __func__,
                         hotspot_vap_info->vap_name ? hotspot_vap_info->vap_name : "NULL",
                         lnf_vap_info->vap_name ? lnf_vap_info->vap_name : "NULL",
@@ -2341,7 +2341,7 @@ bool should_process_hotspot_config_change(const wifi_vap_info_t *lnf_vap_info,
                         vap_enabled_changed ? 1 : 0,
                         radius_config_changed ? 1 : 0,
                         (vap_enabled_changed || radius_config_changed) ? 1 : 0,
-                        result ? "true" : "false");
+                        result ? "true" : "false");*/
     
     wifi_util_dbg_print(WIFI_CTRL, "%s: Exit - returning %s\n", __func__, result ? "true" : "false");
     
@@ -3464,12 +3464,13 @@ bool is_bandwidth_and_hw_variant_compatible(uint32_t variant, wifi_channelBandwi
         }
     }
 #endif /* CONFIG_IEEE80211BE */
-    if (supported_bw < current_bw) {
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - variant:%d ###supported_bw###:%d current_bw:%d\r\n", __FUNCTION__, __LINE__, variant, supported_bw, current_bw);
+    /*if (supported_bw < current_bw) {
         wifi_util_error_print(WIFI_WEBCONFIG,"%s:%d variant:%d supported bandwidth:%d current_bw:%d \r\n", __func__, __LINE__, variant, supported_bw, current_bw);
         return false;
     } else {
-        return true;
-    }
+        return true;}*/
+    return true
 }
 
 int validate_radio_parameters(const wifi_radio_operationParam_t *radio_info)
