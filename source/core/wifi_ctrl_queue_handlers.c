@@ -3672,7 +3672,7 @@ void handle_webconfig_event(wifi_ctrl_t *ctrl, const char *raw, unsigned int len
         data.u.decoded.num_radios = getNumberRadios();
 
         // tell webconfig to encode
-            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling webconfig_encode \n", __FUNCTION__, __LINE__);
+            wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - calling .webconfig_encode \n", __FUNCTION__, __LINE__);
 
 	webconfig_encode(&ctrl->webconfig, &data, webconfig_subdoc_type_dml);
         webconfig_data_free(&data);
