@@ -3465,6 +3465,8 @@ bool is_bandwidth_and_hw_variant_compatible(uint32_t variant, wifi_channelBandwi
         }
     }
 #endif /* CONFIG_IEEE80211BE */
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] supported bandwidth not #####retruned false  %s:%d variant:%d supported bandwidth:%d current_bw:%d\ r\n", __func__, __LINE__, variant, supported_bw, current_bw);
+
     if (supported_bw < current_bw) {
 	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] supported bandwidth retruned false  %s:%d variant:%d supported bandwidth:%d current_bw:%d \r\n", __func__, __LINE__, variant, supported_bw, current_bw);
 

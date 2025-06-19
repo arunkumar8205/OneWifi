@@ -139,6 +139,7 @@ webconfig_error_t encode_radio_object(const rdk_wifi_radio_t *radio, cJSON *radi
     wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d - RadioName: %s\n", __FUNCTION__, __LINE__, radio->name);
     radio_info = &radio->oper;
     radio_feat = &radio->feature;
+    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%d calling validate_radio_parameters\n", __FUNCTION__, __LINE__);
 
     if (validate_radio_parameters(radio_info) != RETURN_OK) {
 	    wifi_util_dbg_print(WIFI_CTRL, "[Onewifi crash] %s():%dSet failed invalid Country code\n", __FUNCTION__, __LINE__);
